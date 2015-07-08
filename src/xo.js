@@ -1,15 +1,17 @@
 (function () {
   "use strict";
-  var root = this;
-  var previous_xo = root.xo;
+  var root = this,
+    previous_xo = root.xo,
+    xo;
 
-  var xo = function () {
-    // module code goes here
-  };
-
-  xo.noConflict = function () {
+  function noConflict() {
     root.xo = previous_xo;
     return xo;
+  }
+
+  xo = {
+    VERSION: '0.0.1',
+    noConflict: noConflict
   };
 
   if (typeof exports !== 'undefined') {
