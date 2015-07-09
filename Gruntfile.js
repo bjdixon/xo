@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('uglify', ['uglify']);
+    grunt.registerTask('build', ['uglify']);
 
 };
 
