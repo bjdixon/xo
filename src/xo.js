@@ -9,6 +9,30 @@
     return xo;
   }
 
+  function partial() {
+    // stub
+  }
+
+  function flatten() {
+    // stub
+  }
+
+  function filter() {
+    // stub
+  }
+
+  function compact() {
+    // stub
+  }
+
+  function findIndex() {
+    // stub
+  }
+
+  function memoize() {
+    // stub
+  }
+
   xo = {
     VERSION: '0.0.1',
     noConflict: noConflict
