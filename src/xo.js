@@ -29,13 +29,21 @@
     // stub
   }
 
-  function memoize() {
-    // stub
+  function memoize(fn) {
+    var cache = {};
+    return function() {
+      var key = Array.prototype.slice.call(arguments).join('');
+      if (!cache[key]) {
+        cache[key] = fn.apply(this, arguments);
+      }
+      return cache[key];
+    };
   }
 
   xo = {
     VERSION: '0.0.1',
-    noConflict: noConflict
+    noConflict: noConflict,
+    memoize: memoize
   };
 
   if (typeof exports !== 'undefined') {
