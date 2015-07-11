@@ -33,10 +33,7 @@
     var cache = {};
     return function() {
       var key = Array.prototype.slice.call(arguments).join('');
-      if (!cache[key]) {
-        cache[key] = fn.apply(this, arguments);
-      }
-      return cache[key];
+      return cache[key] || (cache[key] = fn.apply(this, arguments));
     };
   }
 
