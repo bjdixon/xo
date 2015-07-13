@@ -30,5 +30,21 @@ describe('xo.memoize', function(){
     expect(memoId('foo', 'bar', 'baz')).toEqual(id('foo', 'bar', 'baz'));
   });
 
+  it('returns same value as non memoized functions (array argument)', function(){
+    var id = function(args) {
+      return args.join(', ');
+    };
+    var memoId = xo.memoize(id);
+    expect(memoId(['foo', 'bar', 'baz'])).toEqual(id(['foo', 'bar', 'baz']));
+  });
+
+  it('returns same value as non memoized functions (object argument)', function(){
+    var id = function(args) {
+      return args.a + args.b.c + args.b.d;
+    };
+    var memoId = xo.memoize(id);
+    expect(memoId({ a: 'foo', b: { c:'bar', d: 'baz' }})).toEqual(id({ a: 'foo', b: { c:'bar', d: 'baz' }}));
+  });
+
 });
 
