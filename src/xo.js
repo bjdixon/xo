@@ -13,8 +13,17 @@
     // stub
   }
 
-  function flatten() {
-    // stub
+  function flatten(arr) {
+    var output = [],
+      value;
+    for (var i = 0; i < arr.length; i += 1) {
+      value = arr[i];
+      if (Array.isArray(value)) {
+        value = flatten(value);
+      }
+      output = Array.prototype.concat.call(output, value);
+    }
+    return output;
   }
 
   function filter() {
@@ -40,7 +49,8 @@
   xo = {
     VERSION: '0.0.1',
     noConflict: noConflict,
-    memoize: memoize
+    memoize: memoize,
+    flatten: flatten
   };
 
   if (typeof exports !== 'undefined') {

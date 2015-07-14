@@ -48,3 +48,13 @@ describe('xo.memoize', function(){
 
 });
 
+describe('xo.flatten', function(){
+
+  it('returns flattened array', function(){
+    var a = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+    var b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    expect(xo.flatten(a)).toEqual(b);
+  });
+
+});
+
