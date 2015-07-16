@@ -14,15 +14,13 @@
   }
 
   function flatten(arr) {
-    var output = [],
-      value;
-    for (var i = 0; i < arr.length; i += 1) {
-      value = arr[i];
-      if (Array.isArray(value)) {
-        value = flatten(value);
+    var output = [];
+    arr.forEach(function(val) {
+      if (Array.isArray(val)) {
+        val = flatten(val);
       }
-      output = Array.prototype.concat.call(output, value);
-    }
+      output = output.concat(val);
+    });
     return output;
   }
 
