@@ -16,10 +16,7 @@
   function flatten(arr) {
     var output = [];
     arr.forEach(function(val) {
-      if (Array.isArray(val)) {
-        val = flatten(val);
-      }
-      output = output.concat(val);
+      output = output.concat(Array.isArray(val) ? flatten(val) : val);
     });
     return output;
   }
