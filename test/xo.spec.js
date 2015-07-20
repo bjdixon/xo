@@ -31,19 +31,21 @@ describe('xo.memoize', function(){
   });
 
   it('returns same value as non memoized functions (array argument)', function(){
+    var testArg = ['foo', 'bar', 'baz'];
     var id = function(args) {
       return args.join(', ');
     };
     var memoId = xo.memoize(id);
-    expect(memoId(['foo', 'bar', 'baz'])).toEqual(id(['foo', 'bar', 'baz']));
+    expect(memoId(testArg)).toEqual(id(testArg));
   });
 
   it('returns same value as non memoized functions (object argument)', function(){
+    var testArg = { a: 'foo', b: { c:'bar', d: 'baz' }};
     var id = function(args) {
       return args.a + args.b.c + args.b.d;
     };
     var memoId = xo.memoize(id);
-    expect(memoId({ a: 'foo', b: { c:'bar', d: 'baz' }})).toEqual(id({ a: 'foo', b: { c:'bar', d: 'baz' }}));
+    expect(memoId(testArg)).toEqual(id(testArg));
   });
 
 });
@@ -51,9 +53,9 @@ describe('xo.memoize', function(){
 describe('xo.flatten', function(){
 
   it('returns flattened array', function(){
-    var a = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
-    var b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    expect(xo.flatten(a)).toEqual(b);
+    var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+    var result = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    expect(xo.flatten(test)).toEqual(result);
   });
 
 });
