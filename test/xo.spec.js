@@ -58,3 +58,13 @@ describe('xo.flatten', function(){
 
 });
 
+describe('xo.compact', function(){
+
+  it('returns array with falsy values removed', function(){
+    var test = [1, , false, 2, , 3, false, 4, 5];
+    var result = [1, 2, 3, 4, 5];
+    expect(xo.compact(test)).toEqual(result);
+  });
+
+});
+

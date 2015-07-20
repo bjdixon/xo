@@ -25,8 +25,10 @@
     // stub
   }
 
-  function compact() {
-    // stub
+  function compact(arr) {
+    return arr.reduce(function(memo, val) {
+      return val ? memo.concat(val) : memo;
+    }, []);
   }
 
   function findIndex() {
@@ -45,7 +47,8 @@
     VERSION: '0.0.1',
     noConflict: noConflict,
     memoize: memoize,
-    flatten: flatten
+    flatten: flatten,
+    compact: compact
   };
 
   if (typeof exports !== 'undefined') {
