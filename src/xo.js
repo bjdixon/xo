@@ -9,8 +9,12 @@
     return xo;
   }
 
-  function partial() {
-    // stub
+  function partial(fn) {
+    var initialArgs = Array.prototype.slice.call(arguments, 1);
+    return function() {
+      var remainingArgs = Array.prototype.slice.call(arguments);
+      return fn.apply({}, initialArgs.concat(remainingArgs));
+    };
   }
 
   function flatten(arr) {
@@ -48,7 +52,8 @@
     noConflict: noConflict,
     memoize: memoize,
     flatten: flatten,
-    compact: compact
+    compact: compact,
+    partial: partial
   };
 
   if (typeof exports !== 'undefined') {
