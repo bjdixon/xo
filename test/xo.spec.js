@@ -96,5 +96,18 @@ describe('xo.partial', function(){
     expect(hi('hi', 'Bob')).toEqual('hi Bob');
   });
 
+  it('takes a function when initializing an argument and context when invoking', function() {
+    function Greet(greeting, name) {
+      this.greeting = greeting;
+      this.name = name;
+    }
+    Greet.prototype.speak = function() {
+      return this.greeting + ' ' + this.name;
+    };
+    var Hi = xo.partial(Greet, 'hi');
+    var hiBob = new Hi('Bob');
+    expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
+  });
+
 });
 

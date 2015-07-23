@@ -13,7 +13,7 @@
     var initialArgs = Array.prototype.slice.call(arguments, 1);
     return function() {
       var remainingArgs = Array.prototype.slice.call(arguments);
-      return fn.apply({}, initialArgs.concat(remainingArgs));
+      return fn.apply(this, initialArgs.concat(remainingArgs));
     };
   }
 
