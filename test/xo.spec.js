@@ -60,7 +60,7 @@ describe('xo.flatten', function() {
 
 });
 
-describe('xo.compact', function(){
+describe('xo.compact', function() {
 
   it('returns array with falsy values removed', function() {
     var test = [1, , false, 2, , 3, false, 4, 5];
@@ -70,7 +70,7 @@ describe('xo.compact', function(){
 
 });
 
-describe('xo.partial', function(){
+describe('xo.partial', function() {
 
   it('takes a function when initializing and an argument when invoking', function() {
     var greet = function(name) {
@@ -107,6 +107,49 @@ describe('xo.partial', function(){
     var Hi = xo.partial(Greet, 'hi');
     var hiBob = new Hi('Bob');
     expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
+  });
+
+});
+
+describe('xo.findIndex', function() {
+
+  it('returns correct index of object where property is found', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '002' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.findIndex(objArr, xo.partial(compare, '003'))).toEqual(2);
+  });
+
+  it('returns -1 when no match is made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '002' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.findIndex(objArr, xo.partial(compare, '005'))).toEqual(-1);
+  });
+
+  it('returns index of first occurence when multiple matches can be made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '003' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '003' }
+    ];
+    expect(xo.findIndex(objArr, xo.partial(compare, '003'))).toEqual(1);
   });
 
 });

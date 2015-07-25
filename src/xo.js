@@ -35,8 +35,15 @@
     }, []);
   }
 
-  function findIndex() {
-    // stub
+  function findIndex(arr, predicate) {
+    var idx,
+      len;
+    for (idx = 0, len = arr.length; idx < len; idx += 1) {
+      if (predicate(arr[idx])) {
+        return idx;
+      }
+    }
+    return -1;
   }
 
   function memoize(fn) {
@@ -53,7 +60,8 @@
     memoize: memoize,
     flatten: flatten,
     compact: compact,
-    partial: partial
+    partial: partial,
+    findIndex: findIndex
   };
 
   if (typeof exports !== 'undefined') {
