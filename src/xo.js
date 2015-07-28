@@ -11,7 +11,8 @@
     flatten: flatten,
     compact: compact,
     partial: partial,
-    findIndex: findIndex
+    findIndex: findIndex,
+    filter: filter
   };
 
   function noConflict() {
@@ -35,8 +36,16 @@
     return output;
   }
 
-  function filter() {
-    // stub
+  function filter(arr, predicate) {
+    var result = [],
+      idx,
+      len;
+    for (idx = 0, len = arr.length; idx < len; idx += 1) {
+      if (predicate(arr[idx])) {
+        result.push(arr[idx]);
+      }
+    }
+    return result;
   }
 
   function compact(arr) {

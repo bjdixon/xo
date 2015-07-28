@@ -154,3 +154,33 @@ describe('xo.findIndex', function() {
 
 });
 
+describe('xo.filter', function() {
+
+  it('returns array of objects where property is found', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '003' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.filter(objArr, xo.partial(compare, '003')).length).toEqual(2);
+  });
+
+  it('returns empty array when no match is made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '002' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.filter(objArr, xo.partial(compare, '005'))).toEqual([]);
+  });
+
+});
+
