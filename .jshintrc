@@ -1,0 +1,60 @@
+{
+  // Settings
+  "passfail": false, // Stop on first error.
+  "maxerr": 100, // Maximum error before stopping.
+
+  // Globals
+  "browser": true, // Standard browser globals
+  "node": false,
+  "rhino": false,
+  "couch": false,
+  "jquery": true,
+  "prototypejs": false,
+  "mootools": false,
+  "dojo": false,
+  "predef": [  // Custom globals.
+    "Angular",
+    "module",
+    "exports",
+    "require",
+    "describe",
+    "it",
+    "expect"
+  ],
+
+  // Development
+  "debug": true, // Allow debugger statements
+  "devel": true, // Allow developments statements
+
+  // ECMAScript 5.
+  "strict": true, // Require `use strict` pragma  in every file.
+  "globalstrict": true, // Allow global "use strict"
+
+  // Personal  preferences.
+  "asi": false, // Tolerate Automatic Semicolon Insertion (no semicolons).
+  "laxbreak": false, // Tolerate unsafe line breaks
+  "bitwise": true, // Prohibit bitwise operators (&, |, ^, etc.).
+  "boss": false, // Tolerate assignments inside if, for & while.
+  "curly": true, // Require {} for every new block or scope.
+  "eqeqeq": true, // Require triple equals i.e. `===`.
+  "eqnull": true, // Tolerate use of `== null`.
+  "evil": false, // Tolerate use of `eval`.
+  "expr": false, // Tolerate `ExpressionStatement` as Programs.
+  "forin": false, // Tolerate `for in` loops without `hasOwnPrototype`.
+  "immed": true, // Require immediate invocations to be wrapped in parens
+  "loopfunc": false, // Allow functions to be defined within loops.
+  "noarg": true, // Prohibit use of `arguments.caller` and `arguments.callee`.
+  "regexp": true, // Prohibit `.` and `[^...]` in regular expressions.
+  "regexdash": false, // Tolerate unescaped last dash i.e. `[-...]`.
+  "scripturl": true, // Tolerate script-targeted URLs.
+  "shadow": true, // Allows re-define variables later in code
+  "supernew": true, // Tolerate `new function () { ... };` and `new Object;`.
+  "undef": true, // Require all non-global variables be declared before they are used.
+  "newcap": true, // Require capitalization of all constructor functions
+  "onevar": true, // Allow only one `var` statement per function.
+  "plusplus": false, // Prohibit use of `++` & `--`.
+  "trailing": true, // Prohibit trailing whitespaces.
+  "white": true, // Check against strict whitespace and indentation rules.
+  "elision": true, // allow empty array expressions 
+  "indent": 2 // Specify indentation spacing
+}

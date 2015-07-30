@@ -5,7 +5,7 @@
     xo;
 
   xo = {
-    VERSION: '0.0.1',
+    VERSION: '0.1.0',
     noConflict: noConflict,
     memoize: memoize,
     flatten: flatten,
@@ -75,7 +75,7 @@
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = xo;
+      exports = module.exports = xo; // jshint ignore:line
     }
     exports.xo = xo;
   } else {

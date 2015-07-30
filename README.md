@@ -1,7 +1,15 @@
-TODO:
------
+xo
+==
 
-* Add stubs
-* Add tests for stubs
-* Add browser tests
-* Start filling out stubs and updating related tests
+Helper functions for working with functions and arrays.
+
+Contains
+--------
+
+* partial
+* filter
+* findIndex
+* flatten
+* compact
+* memoize
+

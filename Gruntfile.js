@@ -1,14 +1,9 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         jshint: {
-            files: ['src/js/*'],
+            files: ['src/xo.js', 'test/xo.spec.js'],
             options: {
-                globals: {
-                    angular: true
-                },
-                strict: true,
-                enforceall: true,
-                camelcase: false
+                jshintrc: true
             }
         },
         watch: {
