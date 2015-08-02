@@ -6,7 +6,7 @@ if(typeof xo === 'undefined') {
 describe('xo.VERSION', function() {
 
   it('returns correct version number', function() {
-    expect(xo.VERSION).toBe('0.0.1');
+    expect(xo.VERSION).toBe('0.1.0');
   });
 
 });
@@ -180,6 +180,20 @@ describe('xo.filter', function() {
       { name: 'd', id: '004' }
     ];
     expect(xo.filter(objArr, xo.partial(compare, '005'))).toEqual([]);
+  });
+
+});
+
+describe('xo.isBoolean', function() {
+
+  it('returns true for booleans', function() {
+    var bool = false;
+    expect(xo.isBoolean(bool)).toEqual(true);
+  });
+
+  it('returns false for non booleans', function() {
+    var notBool = 'true';
+    expect(xo.isBoolean(notBool)).toEqual(false);
   });
 
 });

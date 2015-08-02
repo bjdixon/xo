@@ -12,7 +12,8 @@
     compact: compact,
     partial: partial,
     findIndex: findIndex,
-    filter: filter
+    filter: filter,
+    isBoolean: is('boolean')
   };
 
   function noConflict() {
@@ -70,6 +71,12 @@
     return function() {
       var key = JSON.stringify(arguments);
       return cache[key] || (cache[key] = fn.apply(this, arguments));
+    };
+  }
+
+  function is(type) {
+    return function(test) {
+      return typeof test === type;
     };
   }
 
