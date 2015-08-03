@@ -212,3 +212,17 @@ describe('xo.isNumber', function() {
 
 });
 
+describe('xo.isString', function() {
+
+  it('returns true for strings', function() {
+    var string  = '42';
+    expect(xo.isString(string)).toEqual(true);
+  });
+
+  it('returns false for non strings', function() {
+    var notString = true;
+    expect(xo.isString(notString)).toEqual(false);
+  });
+
+});
+

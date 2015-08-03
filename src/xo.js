@@ -14,7 +14,8 @@
     findIndex: findIndex,
     filter: filter,
     isBoolean: is('boolean'),
-    isNumber: is('number')
+    isNumber: is('number'),
+    isString: is('string')
   };
 
   function noConflict() {
