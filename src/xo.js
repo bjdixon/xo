@@ -13,7 +13,8 @@
     partial: partial,
     findIndex: findIndex,
     filter: filter,
-    isBoolean: is('boolean')
+    isBoolean: is('boolean'),
+    isNumber: is('number')
   };
 
   function noConflict() {

@@ -198,3 +198,17 @@ describe('xo.isBoolean', function() {
 
 });
 
+describe('xo.isNumber', function() {
+
+  it('returns true for numbers', function() {
+    var number = 3;
+    expect(xo.isNumber(number)).toEqual(true);
+  });
+
+  it('returns false for non numbers', function() {
+    var notNumber = '3';
+    expect(xo.isNumber(notNumber)).toEqual(false);
+  });
+
+});
+
