@@ -13,9 +13,9 @@
     partial: partial,
     findIndex: findIndex,
     filter: filter,
-    isBoolean: is('boolean'),
-    isNumber: is('number'),
-    isString: is('string')
+    isBoolean: is('Boolean'),
+    isNumber: is('Number'),
+    isString: is('String')
   };
 
   function noConflict() {
@@ -77,8 +77,16 @@
   }
 
   function is(type) {
+    var fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
+    if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
+      type = type.toLowerCase();
+      return function(test) {
+        return typeof test === type;
+      };
+    }
+    type = '[object ' + type + ']';
     return function(test) {
-      return typeof test === type;
+      return Object.prototype.toString.call(test) === type;
     };
   }
 
