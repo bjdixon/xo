@@ -226,3 +226,17 @@ describe('xo.isString', function() {
 
 });
 
+describe('xo.isObject', function() {
+
+  it('returns true for objects', function() {
+    var object  = {a: '1', b: '2'};
+    expect(xo.isObject(object)).toEqual(true);
+  });
+
+  it('returns false for non objects', function() {
+    var notObject = true;
+    expect(xo.isObject(notObject)).toEqual(false);
+  });
+
+});
+

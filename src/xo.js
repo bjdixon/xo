@@ -15,7 +15,8 @@
     filter: filter,
     isBoolean: is('Boolean'),
     isNumber: is('Number'),
-    isString: is('String')
+    isString: is('String'),
+    isObject: is('Object')
   };
 
   function noConflict() {
