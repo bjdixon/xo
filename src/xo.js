@@ -17,7 +17,8 @@
     isNumber: is('Number'),
     isString: is('String'),
     isObject: is('Object'),
-    isArray: is('Array')
+    isArray: is('Array'),
+    isFunction: is('Function')
   };
 
   function noConflict() {

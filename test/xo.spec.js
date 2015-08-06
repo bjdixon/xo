@@ -229,7 +229,7 @@ describe('xo.isString', function() {
 describe('xo.isObject', function() {
 
   it('returns true for objects', function() {
-    var object  = {a: '1', b: '2'};
+    var object = {a: '1', b: '2'};
     expect(xo.isObject(object)).toEqual(true);
   });
 
@@ -243,13 +243,27 @@ describe('xo.isObject', function() {
 describe('xo.isArray', function() {
 
   it('returns true for arrays', function() {
-    var array  = [1, 2, 3];
+    var array = [1, 2, 3];
     expect(xo.isArray(array)).toEqual(true);
   });
 
   it('returns false for non arrays', function() {
     var notArray= true;
     expect(xo.isArray(notArray)).toEqual(false);
+  });
+
+});
+
+describe('xo.isFunction', function() {
+
+  it('returns true for functions', function() {
+    var func = function() { return true; };
+    expect(xo.isFunction(func)).toEqual(true);
+  });
+
+  it('returns false for non functions', function() {
+    var notFunction = true;
+    expect(xo.isFunction(notFunction)).toEqual(false);
   });
 
 });
