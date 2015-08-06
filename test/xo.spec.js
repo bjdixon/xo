@@ -240,3 +240,17 @@ describe('xo.isObject', function() {
 
 });
 
+describe('xo.isArray', function() {
+
+  it('returns true for arrays', function() {
+    var array  = [1, 2, 3];
+    expect(xo.isArray(array)).toEqual(true);
+  });
+
+  it('returns false for non arrays', function() {
+    var notArray= true;
+    expect(xo.isArray(notArray)).toEqual(false);
+  });
+
+});
+

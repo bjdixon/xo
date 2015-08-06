@@ -16,7 +16,8 @@
     isBoolean: is('Boolean'),
     isNumber: is('Number'),
     isString: is('String'),
-    isObject: is('Object')
+    isObject: is('Object'),
+    isArray: is('Array')
   };
 
   function noConflict() {
