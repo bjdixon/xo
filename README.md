@@ -12,4 +12,9 @@ Contains
 * flatten
 * compact
 * memoize
-
+* isArray
+* isFunction
+* isObject
+* isString
+* isNumber
+* isBoolean
