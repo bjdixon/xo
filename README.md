@@ -18,3 +18,4 @@ Contains
 * isString
 * isNumber
 * isBoolean
+* maybe
