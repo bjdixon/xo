@@ -18,7 +18,8 @@
     isString: is('String'),
     isObject: is('Object'),
     isArray: is('Array'),
-    isFunction: is('Function')
+    isFunction: is('Function'),
+    maybe: maybe
   };
 
   function noConflict() {
@@ -90,6 +91,23 @@
     type = '[object ' + type + ']';
     return function(test) {
       return Object.prototype.toString.call(test) === type;
+    };
+  }
+
+  function maybe(fn) {
+    return function() {
+      var args = Array.prototype.slice.call(arguments),
+        idx,
+        len;
+      if (!args.length) {
+        return;
+      }
+      for (idx = 0, len = args.length; idx < len; idx += 1) {
+        if (args[idx] == null) {
+          return;
+        }
+      }
+      return fn.apply(this, args);
     };
   }
 

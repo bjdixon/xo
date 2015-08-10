@@ -268,3 +268,39 @@ describe('xo.isFunction', function() {
 
 });
 
+describe('xo.maybe', function() {
+
+  it('invokes a function if it has truthy arguments', function() {
+    function sum(a, b) {
+      return a + b;
+    }
+    var maybeSum = xo.maybe(sum);
+    expect(xo.isNumber(maybeSum(2, 3))).toEqual(true);
+  });
+
+  it('doesn\'t invoke a function if it has zero arguments', function() {
+    function sum(a, b) {
+      return a + b;
+    }
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum()).toEqual(undefined);
+  });
+
+  it('doesn\'t invoke a function if it has null arguments', function() {
+    function sum(a, b) {
+      return a + b;
+    }
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum(null, 4)).toEqual(undefined);
+  });
+
+  it('doesn\'t invoke a function if it has undefined arguments', function() {
+    function sum(a, b) {
+      return a + b;
+    }
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum(4, undefined)).toEqual(undefined);
+  });
+
+});
+
