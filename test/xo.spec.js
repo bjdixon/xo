@@ -6,7 +6,7 @@ if(typeof xo === 'undefined') {
 describe('xo.VERSION', function() {
 
   it('returns correct version number', function() {
-    expect(xo.VERSION).toBe('0.2.0');
+    expect(xo.VERSION).toBe('0.3.0');
   });
 
 });
