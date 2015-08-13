@@ -5,7 +5,7 @@
     xo;
 
   xo = {
-    VERSION: '0.3.0',
+    VERSION: '0.3.1',
     noConflict: noConflict,
     memoize: memoize,
     flatten: flatten,
@@ -96,16 +96,9 @@
 
   function maybe(fn) {
     return function() {
-      var args = Array.prototype.slice.call(arguments),
-        idx,
-        len;
-      if (!args.length) {
+      var args = Array.prototype.slice.call(arguments);
+      if (!args.length || args.some(function(val) { return val == null; })) {
         return;
-      }
-      for (idx = 0, len = args.length; idx < len; idx += 1) {
-        if (args[idx] == null) {
-          return;
-        }
       }
       return fn.apply(this, args);
     };
