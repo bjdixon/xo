@@ -19,16 +19,37 @@ module.exports = function(grunt) {
                     'dist/xo.min.js': ['src/xo.js']
                 }
             }
-        }
+        },
+        jasmine: {
+          coverage: {
+              src: ['src/xo.js'],
+              options: {
+                  specs: ['test/xo.spec.js'],
+                  template: require('grunt-template-jasmine-istanbul'),
+                  templateOptions: {
+                      coverage: 'bin/coverage/coverage.json',
+                      report: [{ type: 'text-summary' }],
+                      thresholds: {
+                          lines: 75,
+                          statements: 75,
+                          branches: 75,
+                          functions: 90
+                      }
+                  }
+              }
+          }
+      }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('build', ['uglify']);
+    grunt.registerTask('coverage', ['jasmine:coverage']);
+    grunt.registerTask('build', ['jshint', 'jasmine:coverage', 'uglify']);
 
 };
 
