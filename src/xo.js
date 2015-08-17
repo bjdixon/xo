@@ -22,11 +22,23 @@
     maybe: maybe
   };
 
+  /**
+   * Allows users to avoid conflicts over the xo name
+   *
+   * @return {Object}
+  */
   function noConflict() {
     root.xo = previous_xo;
     return xo;
   }
 
+  /**
+   * Takes a function with zero or more arguments.
+   * Returns a function that can be invoked with remaining arguments at a later time
+   *
+   * @Param {Function} fn
+   * @return {Function}
+  */
   function partial(fn) {
     var initialArgs = Array.prototype.slice.call(arguments, 1);
     return function() {
@@ -35,6 +47,13 @@
     };
   }
 
+  /**
+   * Takes an n-dimensional nested array.
+   * Returns a flattened 1-dimensional array. 
+   *
+   * @Param {Array} arr
+   * @return {Array}
+  */
   function flatten(arr) {
     var output = [];
     arr.forEach(function(val) {
@@ -43,6 +62,14 @@
     return output;
   }
 
+  /**
+   * Takes an array and a predicate function.
+   * Returns an array with only those terms that pass the predicate
+   *
+   * @Param {Array} arr
+   * @Param {Function} predicate
+   * @return {Array}
+  */
   function filter(arr, predicate) {
     var result = [],
       idx,
@@ -55,12 +82,27 @@
     return result;
   }
 
+  /**
+   * Takes an array.
+   * Returns an array with all falsy values removed
+   *
+   * @Param {Array} arr
+   * @return {Array}
+  */
   function compact(arr) {
     return arr.reduce(function(memo, val) {
       return val ? memo.concat(val) : memo;
     }, []);
   }
 
+  /**
+   * Takes an array and a predicate function.
+   * Returns the index of the first term that passes the predicate 
+   *
+   * @Param {Array} arr
+   * @Param {Function} predicate
+   * @return {Number}
+  */
   function findIndex(arr, predicate) {
     var idx,
       len;
@@ -72,6 +114,14 @@
     return -1;
   }
 
+  /**
+   * Takes a function and returns a function.
+   * Invoking the returned function will return cached results if the same
+   * arguments have been provided during previous invocations.
+   *
+   * @Param {Function} fn 
+   * @return {Function}
+  */
   function memoize(fn) {
     var cache = {};
     return function() {
@@ -94,6 +144,14 @@
     };
   }
 
+  /**
+   * Takes a function and returns a function.
+   * The returned function will not be called if supplied with null
+   * or undefined arguments
+   *
+   * @Param {Function} fn 
+   * @return {Function}
+  */
   function maybe(fn) {
     return function() {
       var args = Array.prototype.slice.call(arguments);
