@@ -3,7 +3,10 @@
   var root = this,
     previous_xo = root.xo,
     xo;
-
+  /**
+   * @namespace xo
+   * @version 0.3.1
+  */
   xo = {
     VERSION: '0.3.1',
     noConflict: noConflict,
@@ -18,9 +21,10 @@
     isString: is('String'),
     isObject: is('Object'),
     isArray: is('Array'),
-    isFunction: is('Function'),
-    maybe: maybe
+    isFunction: is('Function')
   };
+
+  xo.maybe = maybe;
 
   /**
    * Allows users to avoid conflicts over the xo name
@@ -36,7 +40,7 @@
    * Takes a function with zero or more arguments.
    * Returns a function that can be invoked with remaining arguments at a later time
    *
-   * @Param {Function} fn
+   * @param {Function} fn
    * @return {Function}
   */
   function partial(fn) {
@@ -51,7 +55,7 @@
    * Takes an n-dimensional nested array.
    * Returns a flattened 1-dimensional array. 
    *
-   * @Param {Array} arr
+   * @param {Array} arr
    * @return {Array}
   */
   function flatten(arr) {
@@ -66,8 +70,8 @@
    * Takes an array and a predicate function.
    * Returns an array with only those terms that pass the predicate
    *
-   * @Param {Array} arr
-   * @Param {Function} predicate
+   * @param {Array} arr
+   * @param {Function} predicate
    * @return {Array}
   */
   function filter(arr, predicate) {
@@ -86,7 +90,7 @@
    * Takes an array.
    * Returns an array with all falsy values removed
    *
-   * @Param {Array} arr
+   * @param {Array} arr
    * @return {Array}
   */
   function compact(arr) {
@@ -99,8 +103,8 @@
    * Takes an array and a predicate function.
    * Returns the index of the first term that passes the predicate 
    *
-   * @Param {Array} arr
-   * @Param {Function} predicate
+   * @param {Array} arr
+   * @param {Function} predicate
    * @return {Number}
   */
   function findIndex(arr, predicate) {
@@ -119,7 +123,7 @@
    * Invoking the returned function will return cached results if the same
    * arguments have been provided during previous invocations.
    *
-   * @Param {Function} fn 
+   * @param {Function} fn 
    * @return {Function}
   */
   function memoize(fn) {
@@ -149,7 +153,7 @@
    * The returned function will not be called if supplied with null
    * or undefined arguments
    *
-   * @Param {Function} fn 
+   * @param {Function} fn 
    * @return {Function}
   */
   function maybe(fn) {

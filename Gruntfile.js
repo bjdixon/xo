@@ -38,6 +38,14 @@ module.exports = function(grunt) {
                   }
               }
           }
+      },
+      jsdoc : {
+          dist : {
+              src: ['src/xo.js'],
+              options: {
+                  destination: 'doc'
+              }
+          }
       }
     });
 
@@ -45,10 +53,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('coverage', ['jasmine:coverage']);
+    grunt.registerTask('docs', ['jsdoc']);
     grunt.registerTask('build', ['jshint', 'jasmine:coverage', 'uglify']);
 
 };
