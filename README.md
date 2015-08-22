@@ -1,3 +1,5 @@
+[![Dependency Status](https://david-dm.org/bjdixon/xo.svg)](https://david-dm.org/bjdixon/xo)
+[![devDependency Status](https://david-dm.org/bjdixon/xo/dev-status.svg)](https://david-dm.org/bjdixon/xo#info=devDependencies)
 xo
 ==
 
