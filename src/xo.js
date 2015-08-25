@@ -4,7 +4,7 @@
     previous_xo = root.xo,
     xo;
   /**
-   * @namespace xo
+   * @module xo
    * @version 0.3.1
   */
   xo = {
@@ -21,14 +21,15 @@
     isString: is('String'),
     isObject: is('Object'),
     isArray: is('Array'),
-    isFunction: is('Function')
+    isFunction: is('Function'),
+    maybe: maybe
   };
 
-  xo.maybe = maybe;
 
   /**
    * Allows users to avoid conflicts over the xo name
    *
+   * @alias module:xo.noConflict
    * @return {Object}
   */
   function noConflict() {
@@ -40,6 +41,7 @@
    * Takes a function with zero or more arguments.
    * Returns a function that can be invoked with remaining arguments at a later time
    *
+   * @alias module:xo.partial
    * @param {Function} fn
    * @return {Function}
   */
@@ -55,6 +57,7 @@
    * Takes an n-dimensional nested array.
    * Returns a flattened 1-dimensional array. 
    *
+   * @alias module:xo.flatten
    * @param {Array} arr
    * @return {Array}
   */
@@ -70,6 +73,7 @@
    * Takes an array and a predicate function.
    * Returns an array with only those terms that pass the predicate
    *
+   * @alias module:xo.filter
    * @param {Array} arr
    * @param {Function} predicate
    * @return {Array}
@@ -90,6 +94,7 @@
    * Takes an array.
    * Returns an array with all falsy values removed
    *
+   * @alias module:xo.compact
    * @param {Array} arr
    * @return {Array}
   */
@@ -103,6 +108,7 @@
    * Takes an array and a predicate function.
    * Returns the index of the first term that passes the predicate 
    *
+   * @alias module:xo.findIndex
    * @param {Array} arr
    * @param {Function} predicate
    * @return {Number}
@@ -123,6 +129,7 @@
    * Invoking the returned function will return cached results if the same
    * arguments have been provided during previous invocations.
    *
+   * @alias module:xo.memoize
    * @param {Function} fn 
    * @return {Function}
   */
@@ -153,6 +160,7 @@
    * The returned function will not be called if supplied with null
    * or undefined arguments
    *
+   * @alias module:xo.maybe
    * @param {Function} fn 
    * @return {Function}
   */
