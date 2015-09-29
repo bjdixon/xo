@@ -11,6 +11,22 @@ describe('xo.VERSION', function() {
 
 });
 
+describe('xo.noConflict', function() {
+
+  var ox = xo.noConflict();
+
+  it('can be assigned to another namespace', function() {
+    expect(ox.hasOwnProperty('memoize')).toEqual(true);
+  });
+
+  it('alternate namespace version can coexist with xo assigned a different value', function() {
+    var xo = { a: 1, b: 2 };
+    expect(ox.hasOwnProperty('flatten')).toEqual(true);
+    expect(xo).toEqual({ a: 1, b: 2 });
+  });
+
+});
+
 describe('xo.memoize', function() {
 
   it('returns same value as non memoized functions (single argument)', function() {
