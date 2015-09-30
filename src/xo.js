@@ -29,6 +29,9 @@
   /**
    * Allows users to avoid conflicts over the xo name
    *
+   * @example
+   * var ox = xo.noConflict();
+   *
    * @alias module:xo.noConflict
    * @return {Object}
   */
@@ -40,6 +43,14 @@
   /**
    * Takes a function with zero or more arguments.
    * Returns a function that can be invoked with remaining arguments at a later time
+   *
+   * @example
+   * var greet = function(greeting, name) {
+   *   return [greeting, name].join(' ');
+   * };
+   *
+   * var sayHi = xo.partial(greet, 'Hi');
+   * sayHi('Bob'); // "Hi Bob"
    *
    * @alias module:xo.partial
    * @param {Function} fn
@@ -57,6 +68,10 @@
    * Takes an n-dimensional nested array.
    * Returns a flattened 1-dimensional array. 
    *
+   * @example
+   * var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+   * xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+   *
    * @alias module:xo.flatten
    * @param {Array} arr
    * @return {Array}
@@ -72,6 +87,18 @@
   /**
    * Takes an array and a predicate function.
    * Returns an array with only those terms that pass the predicate
+   *
+   * @example
+   * function compare(id, obj) {
+   *   return id === obj.id;
+   * }
+   * var objArr = [
+   *   { name: 'a', id: '001' },
+   *   { name: 'b', id: '003' },
+   *   { name: 'c', id: '003' },
+   *   { name: 'd', id: '004' }
+   * ];
+   * xo.filter(objArr, xo.partial(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
    *
    * @alias module:xo.filter
    * @param {Array} arr
@@ -94,6 +121,10 @@
    * Takes an array.
    * Returns an array with all falsy values removed
    *
+   * @example
+   * var test = [1, , false, 2, 3, false];
+   * xo.compact(test); // [1, 2, 3]
+   *
    * @alias module:xo.compact
    * @param {Array} arr
    * @return {Array}
@@ -107,6 +138,18 @@
   /**
    * Takes an array and a predicate function.
    * Returns the index of the first term that passes the predicate 
+   *
+   * @example
+   * function compare(id, obj) {
+   *   return id === obj.id;
+   * }
+   * var objArr = [
+   *   { name: 'a', id: '001' },
+   *   { name: 'b', id: '002' },
+   *   { name: 'c', id: '003' },
+   *   { name: 'd', id: '004' }
+   * ];
+   * xo.findIndex(objArr, xo.partial(compare, '003')); // 2
    *
    * @alias module:xo.findIndex
    * @param {Array} arr
@@ -128,6 +171,14 @@
    * Takes a function and returns a function.
    * Invoking the returned function will return cached results if the same
    * arguments have been provided during previous invocations.
+   *
+   * @example
+   * var upper = function(str) {
+   *   return str.toUpperCase();
+   * };
+   * var memoUpper = xo.memoize(upper);
+   * memoUpper('foo'); // "FOO"
+   * memoUpper('foo'); // "FOO" (cached version)
    *
    * @alias module:xo.memoize
    * @param {Function} fn 
