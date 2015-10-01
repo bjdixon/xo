@@ -210,6 +210,14 @@
    * Takes a function and returns a function.
    * The returned function will not be called if supplied with null
    * or undefined arguments
+   * 
+   * @example
+   * var sum = function(a, b) {
+   *   return a + b;
+   * }
+   * var maybeSum = xo.maybe(sum);
+   * maybeSum(2, 3); // 5
+   * maybeSum(null, 3); // doesn't invoke sum
    *
    * @alias module:xo.maybe
    * @param {Function} fn 
