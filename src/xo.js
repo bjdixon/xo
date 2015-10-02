@@ -12,6 +12,10 @@
   xo = {};
   xo.VERSION = '0.3.1';
 
+  function identity(x) {
+    return x;
+  }
+
   function is(type) {
     var fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
     if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
@@ -221,9 +225,7 @@
    * @return {Array}
   */
   xo.compact = function(arr) {
-    return arr.reduce(function(memo, val) {
-      return val ? memo.concat(val) : memo;
-    }, []);
+    return xo.filter(arr, identity);
   };
 
   /**
