@@ -1,29 +1,114 @@
 (function () {
   "use strict";
+
   var root = this,
     previous_xo = root.xo,
     xo;
+
   /**
-   * @module xo
+   * @namespace xo
    * @version 0.3.1
   */
-  xo = {
-    VERSION: '0.3.1',
-    noConflict: noConflict,
-    memoize: memoize,
-    flatten: flatten,
-    compact: compact,
-    partial: partial,
-    findIndex: findIndex,
-    filter: filter,
-    isBoolean: is('Boolean'),
-    isNumber: is('Number'),
-    isString: is('String'),
-    isObject: is('Object'),
-    isArray: is('Array'),
-    isFunction: is('Function'),
-    maybe: maybe
-  };
+  xo = {};
+  xo.VERSION = '0.3.1';
+
+  function is(type) {
+    var fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
+    if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
+      type = type.toLowerCase();
+      return function(test) {
+        return typeof test === type;
+      };
+    }
+    type = '[object ' + type + ']';
+    return function(test) {
+      return Object.prototype.toString.call(test) === type;
+    };
+  }
+
+  /**
+   * Type check for Boolean
+   *
+   * @example
+   * xo.isBoolean(true); // true
+   * xo.isBoolean('true'); // false
+   *
+   * @function
+   * @name xo.isBoolean
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */
+  xo.isBoolean = is('Boolean');
+ 
+  /**
+   * Type check for Number
+   *
+   * @example
+   * xo.isNumber(42); // true
+   * xo.isNumber('true'); // false
+   *
+   * @function
+   * @name xo.isNumber
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */ 
+  xo.isNumber = is('Number');
+ 
+  /**
+   * Type check for String 
+   *
+   * @example
+   * xo.isString('true'); // true
+   * xo.isString(true); // false
+   *
+   * @function
+   * @name xo.isString
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */ 
+  xo.isString = is('String');
+ 
+  /**
+   * Type check for Object
+   *
+   * @example
+   * xo.isObject({ a: true }); // true
+   * xo.isObject(true); // false
+   *
+   * @function
+   * @name xo.isObject
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */ 
+  xo.isObject = is('Object');
+ 
+  /**
+   * Type check for Array
+   *
+   * @example
+   * xo.isArray([1, 2, 3]); // true
+   * xo.isArray(true); // false
+   *
+   * @function
+   * @name xo.isArray
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */ 
+  xo.isArray = is('Array');
+ 
+  /**
+   * Type check for Function
+   *
+   * @example
+   * xo.isFunction(function(){ return true; }); // true
+   * xo.isFunction(true); // false
+   *
+   * @function
+   * @name xo.isFunction
+   * @param {*} test - The argument to be checked
+   * @return {Boolean}
+  */ 
+  xo.isFunction = is('Function');
 
 
   /**
@@ -32,13 +117,14 @@
    * @example
    * var ox = xo.noConflict();
    *
-   * @alias module:xo.noConflict
+   * @function
+   * @name xo.noConflict
    * @return {Object}
   */
-  function noConflict() {
+  xo.noConflict = function() {
     root.xo = previous_xo;
     return xo;
-  }
+  };
 
   /**
    * Takes a function with zero or more arguments.
@@ -52,17 +138,19 @@
    * var sayHi = xo.partial(greet, 'Hi');
    * sayHi('Bob'); // "Hi Bob"
    *
-   * @alias module:xo.partial
-   * @param {Function} fn
+   * @function
+   * @name xo.partial
+   * @param {Function} fn - Partially apply this function prefilling some arguments
+   * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
    * @return {Function}
   */
-  function partial(fn) {
+  xo.partial = function(fn) {
     var initialArgs = Array.prototype.slice.call(arguments, 1);
     return function() {
       var remainingArgs = Array.prototype.slice.call(arguments);
       return fn.apply(this, initialArgs.concat(remainingArgs));
     };
-  }
+  };
 
   /**
    * Takes an n-dimensional nested array.
@@ -72,17 +160,18 @@
    * var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
    * xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
    *
-   * @alias module:xo.flatten
-   * @param {Array} arr
+   * @function
+   * @name xo.flatten
+   * @param {Array} arr - The array that will be recursively flattened
    * @return {Array}
   */
-  function flatten(arr) {
+  xo.flatten = function(arr) {
     var output = [];
     arr.forEach(function(val) {
-      output = output.concat(Array.isArray(val) ? flatten(val) : val);
+      output = output.concat(Array.isArray(val) ? xo.flatten(val) : val);
     });
     return output;
-  }
+  };
 
   /**
    * Takes an array and a predicate function.
@@ -100,12 +189,13 @@
    * ];
    * xo.filter(objArr, xo.partial(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
    *
-   * @alias module:xo.filter
-   * @param {Array} arr
-   * @param {Function} predicate
+   * @function
+   * @name xo.filter
+   * @param {Array} arr - The array containing the elements to test
+   * @param {Function} predicate - The function against which each element of the array will be tested
    * @return {Array}
   */
-  function filter(arr, predicate) {
+  xo.filter = function(arr, predicate) {
     var result = [],
       idx,
       len;
@@ -115,7 +205,7 @@
       }
     }
     return result;
-  }
+  };
 
   /**
    * Takes an array.
@@ -125,15 +215,16 @@
    * var test = [1, , false, 2, 3, false];
    * xo.compact(test); // [1, 2, 3]
    *
-   * @alias module:xo.compact
-   * @param {Array} arr
+   * @function
+   * @name xo.compact
+   * @param {Array} arr - The array containing the elements to test
    * @return {Array}
   */
-  function compact(arr) {
+  xo.compact = function(arr) {
     return arr.reduce(function(memo, val) {
       return val ? memo.concat(val) : memo;
     }, []);
-  }
+  };
 
   /**
    * Takes an array and a predicate function.
@@ -151,12 +242,13 @@
    * ];
    * xo.findIndex(objArr, xo.partial(compare, '003')); // 2
    *
-   * @alias module:xo.findIndex
-   * @param {Array} arr
-   * @param {Function} predicate
+   * @function
+   * @name xo.findIndex
+   * @param {Array} arr - The array containing the elements to test
+   * @param {Function} predicate - The function against which each element of the array will be tested
    * @return {Number}
   */
-  function findIndex(arr, predicate) {
+  xo.findIndex = function(arr, predicate) {
     var idx,
       len;
     for (idx = 0, len = arr.length; idx < len; idx += 1) {
@@ -165,7 +257,7 @@
       }
     }
     return -1;
-  }
+  };
 
   /**
    * Takes a function and returns a function.
@@ -180,31 +272,18 @@
    * memoUpper('foo'); // "FOO"
    * memoUpper('foo'); // "FOO" (cached version)
    *
-   * @alias module:xo.memoize
-   * @param {Function} fn 
+   * @function
+   * @name xo.memoize
+   * @param {Function} fn - The (expensive) function that will have it's return values cached
    * @return {Function}
   */
-  function memoize(fn) {
+  xo.memoize = function(fn) {
     var cache = {};
     return function() {
       var key = JSON.stringify(arguments);
       return cache[key] || (cache[key] = fn.apply(this, arguments));
     };
-  }
-
-  function is(type) {
-    var fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
-    if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
-      type = type.toLowerCase();
-      return function(test) {
-        return typeof test === type;
-      };
-    }
-    type = '[object ' + type + ']';
-    return function(test) {
-      return Object.prototype.toString.call(test) === type;
-    };
-  }
+  };
 
   /**
    * Takes a function and returns a function.
@@ -219,11 +298,12 @@
    * maybeSum(2, 3); // 5
    * maybeSum(null, 3); // doesn't invoke sum
    *
-   * @alias module:xo.maybe
-   * @param {Function} fn 
+   * @function
+   * @name xo.maybe
+   * @param {Function} fn - The function to be invoked
    * @return {Function}
   */
-  function maybe(fn) {
+  xo.maybe = function(fn) {
     return function() {
       var args = Array.prototype.slice.call(arguments);
       if (!args.length || args.some(function(val) { return val == null; })) {
