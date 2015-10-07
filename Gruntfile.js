@@ -35,7 +35,10 @@ module.exports = function(grunt) {
                           branches: 75,
                           functions: 90
                       }
-                  }
+                  },
+                  vendor: [
+                    'src/xo.js'
+                  ]
               }
           }
       },
@@ -60,7 +63,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('coverage', ['jasmine:coverage']);
     grunt.registerTask('docs', ['jsdoc']);
-    grunt.registerTask('build', ['jshint', 'jasmine:coverage', 'uglify', 'jsdoc']);
+    grunt.registerTask('build', ['jshint', 'uglify', 'jsdoc']);
 
 };
 

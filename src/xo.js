@@ -7,10 +7,10 @@
 
   /**
    * @namespace xo
-   * @version 0.3.1
+   * @version 0.3.2
   */
   xo = {};
-  xo.VERSION = '0.3.1';
+  xo.VERSION = '0.3.2';
 
   function identity(x) {
     return x;
@@ -113,7 +113,6 @@
    * @return {Boolean}
   */ 
   xo.isFunction = is('Function');
-
 
   /**
    * Allows users to avoid conflicts over the xo name
@@ -313,7 +312,7 @@
       }
       return fn.apply(this, args);
     };
-  }
+  };
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
