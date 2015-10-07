@@ -64,6 +64,38 @@ describe('xo.memoize', function() {
     expect(memoId(testArg)).toEqual(id(testArg));
   });
 
+  it('returns cached value, doesn\'t run (expensive) function again', function() {
+    var testArg = { a: 'foo', b: { c: 1, d: 'baz' }};
+    var check = 0;
+    var id = function(args) {
+      check += 1;
+      return args.b.c;
+    };
+    var memoId = xo.memoize(id);
+    // Each time id() is invoked it will incremement check.
+    // Using the memoized version we get the same return value as we would when invoking id()
+    // but without invoking id() more than once (and incrementing check).
+    var test = memoId(testArg);
+    test = memoId(testArg);
+    test = memoId(testArg);
+    expect(test).toEqual(check);
+  });
+
+  it('returns cached value, doesn\'t run (expensive) function again unless arguments change', function() {
+    var check = 0;
+    var upper = function(args) {
+      check += 1;
+      return args.toUpperCase();
+    };
+    var memoUpper = xo.memoize(upper);
+    var test1 = memoUpper('hello'); // check = 1
+    test1 = memoUpper('hello'); // check = 1
+    var test2 = memoUpper('world'); // check = 2
+    test2 = memoUpper('world'); // check = 2
+    test1 = memoUpper('hello'); // check = 2
+    expect([test1, test2, check].join(' ')).toEqual('HELLO WORLD 2');
+  });
+
 });
 
 describe('xo.flatten', function() {
