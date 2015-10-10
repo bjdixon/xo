@@ -3,13 +3,26 @@
 [![Dependency Status](https://david-dm.org/bjdixon/xo.svg)](https://david-dm.org/bjdixon/xo)
 [![devDependency Status](https://david-dm.org/bjdixon/xo/dev-status.svg)](https://david-dm.org/bjdixon/xo#info=devDependencies)
 
-xo
-==
+Helper utils for working with functions and arrays in JavaScript. Full documentation at http://bjdixon.github.com/xo/
 
-Helper functions for working with functions and arrays.
+## Introduction
+xo is essentially a stripped down version of an underscore/lodash type library. I've only implemented the functions that I use the most and those that can be used to create the remaining functions from these types of library.
 
-Contains
---------
+##Source code
+The source is available at:
+[http://github.com/bjdixon/xo](http://github.com/bjdixon/xo/src/xo.js).
+
+##Installation
+Download and add to your html pages.
+
+    <script type="text/javascript" src="xo.min.js"></script>
+
+### Node installation
+Using [npm]:
+
+npm install xo-utils
+
+### Contains
 
 * partial
 * filter
@@ -24,3 +37,4 @@ Contains
 * isNumber
 * isBoolean
 * maybe
+
