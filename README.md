@@ -10,20 +10,28 @@ xo is essentially a stripped down version of an underscore/lodash type library. 
 
 ##Source code
 The source is available at:
-[http://github.com/bjdixon/xo/src/xo.js](http://github.com/bjdixon/xo/src/xo.js).
+[http://github.com/bjdixon/xo](http://github.com/bjdixon/xo).
 
 ##Installation
+
+*Browser*
+
 Download and add to your html pages.
 
 ```html
 <script type="text/javascript" src="xo.min.js"></script>
 ```
 
-### Node installation
+*Node*
+
 Using [npm](https://www.npmjs.com/package/xo-utils):
 
 ```sh
 npm install xo-utils
+```
+
+```javascript
+var xo = require('xo-utils');
 ```
 
 ## Contains
