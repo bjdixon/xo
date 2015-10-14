@@ -47,7 +47,9 @@ module.exports = function(grunt) {
               src: ['src/xo.js'],
               options: {
                   destination: 'doc',
-                  readme: 'README.md'
+                  template: 'node_modules/ink-docstrap/template',
+                  readme: 'doc/intro.html',
+                  configure: 'node_modules/ink-docstrap/template/jsdoc.conf.json'
               }
           }
       }
