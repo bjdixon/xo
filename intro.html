@@ -1,0 +1,96 @@
+<p>Helper utils for working with functions and arrays in JavaScript. Full documentation at http://bjdixon.github.com/xo/</p>
+<h2>Introduction</h2><p>xo is essentially a stripped down version of an underscore/lodash type library. I've only implemented the functions that I use the most and those that can be used to create the remaining functions from these types of library.</p>
+<h2>Source code</h2>
+<p>The source is available at:
+<a href="http://github.com/bjdixon/xo">http://github.com/bjdixon/xo</a>.</p>
+<h2>Installation</h2>
+<h4>Browser</h4>
+<p>Download and add to your html pages.</p>
+<pre class="prettyprint source lang-html"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;xo.min.js&quot;>&lt;/script></code></pre>
+<h4>Node</h4>
+<p>Using <a href="https://www.npmjs.com/package/xo-utils">npm</a>:</p>
+<pre class="prettyprint source lang-sh"><code>npm install xo-utils</code></pre><pre class="prettyprint source lang-javascript"><code>var xo = require('xo-utils');</code></pre>
+<h2>Usage</h2>
+<h4>partial</h4>
+<p>Takes a callback and zero or more arguments to that callback. Returns a function that can be invoked with remaining arguments at a later time.</p>
+<pre class="prettyprint source lang-javascript"><code>function add(a, b) {
+  return a + b;
+}
+
+var addTen = xo.partial(add, 10);
+
+addTen(32); // => 42</code></pre>
+<h4>filter</h4>
+<p>Takes an array and a predicate callback. Returns an array with only those terms that pass the predicate.</p>
+<pre class="prettyprint source lang-javascript"><code>function compare(id, obj) {
+  return id === obj.id;
+}
+var objArr = [
+  { name: 'a', id: '001' },
+  { name: 'b', id: '003' },
+  { name: 'c', id: '003' },
+  { name: 'd', id: '004' }
+];
+xo.filter(objArr, xo.partial(compare, '003')); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}]</code></pre>
+<h4>findIndex</h4>
+<p>Takes an array and a predicate callback. Returns the index of the first term that passes the predicate.</p>
+<pre class="prettyprint source lang-javascript"><code>function compare(id, obj) {
+  return id === obj.id;
+}
+var objArr = [
+  { name: 'a', id: '001' },
+  { name: 'b', id: '002' },
+  { name: 'c', id: '003' },
+  { name: 'd', id: '004' }
+];
+xo.findIndex(objArr, xo.partial(compare, '003')); // => 2</code></pre>
+<h4>flatten</h4>
+<p>Takes an n-dimensional nested array. Returns a flattened 1-dimension array.</p>
+<pre class="prettyprint source lang-javascript"><code>var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+xo.flatten(test); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<h4>compact</h4>
+<p>Takes an array. Returns an array with all falsy values removed.</p>
+<pre class="prettyprint source lang-javascript"><code>var test = [1, , false, 2, 3, false];
+xo.compact(test); // => [1, 2, 3]</code></pre>
+<h4>memoize</h4>
+<p>Takes a function and returns a functions. Invoking the returned function will return cached results if the same arguments have been provided during previous invocations.</p>
+<pre class="prettyprint source lang-javascript"><code>var upper = function(str) {
+  return str.toUpperCase();
+};
+var memoUpper = xo.memoize(upper);
+memoUpper('foo'); // => &quot;FOO&quot;
+memoUpper('foo'); // => &quot;FOO&quot; (cached version)</code></pre>
+<h4>isArray</h4>
+<p>Type check for Array.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isArray([1, 2, 3]); // => true
+xo.isArray(true); // => false</code></pre>
+<h4>isFunction</h4>
+<p>Type check for Function.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isFunction(function(){ return true; }); // => true
+xo.isFunction(true); // => false</code></pre>
+<h4>isObject</h4>
+<p>Type check for Object.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isObject({ a: true }); // => true
+xo.isObject(true); // => false</code></pre>
+<h4>isString</h4>
+<p>Type check for String.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isString('true'); // => true
+xo.isString(true); // => false</code></pre>
+<h4>isNumber</h4>
+<p>Type check for Number.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isNumber(42); // => true
+xo.isNumber('true'); // => false</code></pre>
+<h4>isBoolean</h4>
+<p>Type check for Boolean.</p>
+<pre class="prettyprint source lang-javascript"><code>xo.isBoolean(true); // => true
+xo.isBoolean('true'); // => false</code></pre>
+<h4>maybe</h4>
+<p>Takes a function and returns a function. The returned function will not be invoked if supplied with null or undefined arguments.</p>
+<pre class="prettyprint source lang-javascript"><code>var sum = function(a, b) {
+  return a + b;
+}
+var maybeSum = xo.maybe(sum);
+maybeSum(2, 3); // => 5
+maybeSum(null, 3); // doesn't invoke sum</code></pre>
+<p>&nbsp;</p>
+
