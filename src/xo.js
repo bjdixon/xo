@@ -284,10 +284,8 @@
   */
   xo.findKey = function(obj, predicate) {
     for (var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        if (predicate(obj[prop])) {
-          return prop;
-        }
+      if (obj.hasOwnProperty(prop) && predicate(obj[prop])) {
+        return prop;
       }
     }
     return null;
