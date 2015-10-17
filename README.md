@@ -39,6 +39,7 @@ var xo = require('xo-utils');
 * [partial](#partial)
 * [filter](#filter)
 * [findIndex](#findIndex)
+* [findKey](#findKey)
 * [flatten](#flatten)
 * [compact](#compact)
 * [memoize](#memoize)
@@ -98,6 +99,23 @@ var objArr = [
   { name: 'd', id: '004' }
 ];
 xo.findIndex(objArr, xo.partial(compare, '003')); // => 2
+```
+
+####findKey
+
+Takes an object and a predicate callback. Returns the key of the first term that passes the predicate.
+
+```javascript
+function compare(id, obj) {
+  return id === obj.id;
+}
+var objArr = {
+  hello: { name: 'a', id: '001' },
+  goodbye: { name: 'b', id: '002' },
+  yes: { name: 'c', id: '003' },
+  no: { name: 'd', id: '004' }
+};
+xo.findKey(obj, xo.partial(compare, '003')); // => 'yes'
 ```
 
 ####flatten
