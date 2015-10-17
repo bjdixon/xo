@@ -261,6 +261,39 @@
   };
 
   /**
+   * Takes an object and a predicate function.
+   * Returns the key of the first term that passes the predicate 
+   *
+   * @example
+   * function compare(id, obj) {
+   *   return id === obj.id;
+   * }
+   * var obj = {
+   *   hello: { name: 'a', id: '001' },
+   *   goodbye: { name: 'b', id: '002' },
+   *   yes: { name: 'c', id: '003' },
+   *   no: { name: 'd', id: '004' }
+   * };
+   * xo.findKey(obj, xo.partial(compare, '003')); // yes 
+   *
+   * @function
+   * @name xo.findKey
+   * @param {Object} aobj - The object containing the elements to test
+   * @param {Function} predicate - The function against which each property of the object will be tested
+   * @return {String}
+  */
+  xo.findKey = function(obj, predicate) {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        if (predicate(obj[prop])) {
+          return prop;
+        }
+      }
+    }
+    return null;
+  };
+
+  /**
    * Takes a function and returns a function.
    * Invoking the returned function will return cached results if the same
    * arguments have been provided during previous invocations.

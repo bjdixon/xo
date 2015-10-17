@@ -202,6 +202,49 @@ describe('xo.findIndex', function() {
 
 });
 
+describe('xo.findKey', function() {
+
+  it('returns correct key of object where property is found', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var obj = {
+      hello: { name: 'a', id: '001' },
+      goodbye: { name: 'b', id: '002' },
+      yes: { name: 'c', id: '003' },
+      no: { name: 'd', id: '004' }
+    };
+    expect(xo.findKey(obj, xo.partial(compare, '003'))).toEqual('yes');
+  });
+
+  it('returns null when no match is made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var obj = {
+      hello: { name: 'a', id: '001' },
+      goodbye: { name: 'b', id: '002' },
+      yes: { name: 'c', id: '003' },
+      no: { name: 'd', id: '004' }
+    };
+    expect(xo.findKey(obj, xo.partial(compare, '005'))).toEqual(null);
+  });
+
+  it('returns key of first occurence when multiple matches can be made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var obj = {
+      hello: { name: 'a', id: '001' },
+      goodbye: { name: 'b', id: '003' },
+      yes: { name: 'c', id: '003' },
+      no: { name: 'd', id: '004' }
+    };
+    expect(xo.findKey(obj, xo.partial(compare, '003'))).toEqual('goodbye');
+  });
+
+});
+
 describe('xo.filter', function() {
 
   it('returns array of objects where property is found', function() {
