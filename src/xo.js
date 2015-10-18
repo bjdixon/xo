@@ -278,7 +278,7 @@
    *
    * @function
    * @name xo.findKey
-   * @param {Object} aobj - The object containing the elements to test
+   * @param {Object} obj - The object containing the elements to test
    * @param {Function} predicate - The function against which each property of the object will be tested
    * @return {String}
   */
@@ -289,6 +289,37 @@
       }
     }
     return null;
+  };
+
+  /**
+   * Takes an object or an array  and a predicate function.
+   * Returns the value of the first term that passes the predicate 
+   *
+   * @example
+   * function compare(id, obj) {
+   *   return id === obj.id;
+   * }
+   * var obj = {
+   *   hello: { name: 'a', id: '001' },
+   *   goodbye: { name: 'b', id: '002' },
+   *   yes: { name: 'c', id: '003' },
+   *   no: { name: 'd', id: '004' }
+   * };
+   * xo.find(obj, xo.partial(compare, '003')); // {yes: { name: 'a', id: '003' }} 
+   *
+   * @function
+   * @name xo.find
+   * @param {Object} {Array} collection - The object or array  containing the elements to test
+   * @param {Function} predicate - The function against which each property of the collection will be tested
+   * @return {String} {Number}
+  */
+  xo.find = function(collection, predicate) {
+    if (xo.isArray(collection)) {
+      return collection[xo.findIndex(collection, predicate)];
+    }
+    if (xo.isObject(collection)) {
+      return collection[xo.findKey(collection, predicate)];
+    }
   };
 
   /**
