@@ -273,7 +273,7 @@ describe('xo.find', function() {
     expect(xo.find(obj, xo.partial(compare, '005'))).toEqual(null);
   });
 
-  it('returns key of first occurence when multiple matches can be made', function() {
+  it('returns value of first occurence when multiple matches can be made', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
@@ -284,6 +284,45 @@ describe('xo.find', function() {
       no: { name: 'd', id: '004' }
     };
     expect(xo.find(obj, xo.partial(compare, '003'))).toEqual({ name: 'b', id: '003' });
+  });
+
+  it('returns correct value of array where value is found', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '002' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.find(objArr, xo.partial(compare, '003'))).toEqual({ name: 'c', id: '003' });
+  });
+
+  it('returns null when no match is made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '002' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.find(objArr, xo.partial(compare, '005'))).toEqual(null);
+  });
+
+  it('returns value of first occurence when multiple matches can be made', function() {
+    function compare(id, obj) {
+      return id === obj.id;
+    }
+    var objArr = [
+      { name: 'a', id: '001' },
+      { name: 'b', id: '003' },
+      { name: 'c', id: '003' },
+      { name: 'd', id: '004' }
+    ];
+    expect(xo.find(objArr, xo.partial(compare, '003'))).toEqual({ name: 'b', id: '003' });
   });
 
 });
