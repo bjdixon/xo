@@ -40,6 +40,7 @@ var xo = require('xo-utils');
 * [filter](#filter)
 * [findIndex](#findIndex)
 * [findKey](#findKey)
+* [find](#find)
 * [flatten](#flatten)
 * [compact](#compact)
 * [memoize](#memoize)
@@ -109,13 +110,37 @@ Takes an object and a predicate callback. Returns the key of the first term that
 function compare(id, obj) {
   return id === obj.id;
 }
-var objArr = {
+var obj = {
+  hello: { name: 'a', id: '001' },
+  goodbye: { name: 'b', id: '002' },
+  yes: { name: 'c', id: '003' },
+  no: { name: 'd', id: '004' }
+} ;
+xo.findKey(obj, xo.partial(compare, '003')); // => 'yes'
+```
+
+####find
+
+Takes an object or an array  and a predicate callback. Returns the value of the first term that passes the predicate.
+
+```javascript
+function compare(id, obj) {
+  return id === obj.id;
+}
+var obj = {
   hello: { name: 'a', id: '001' },
   goodbye: { name: 'b', id: '002' },
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 };
-xo.findKey(obj, xo.partial(compare, '003')); // => 'yes'
+var objArr = [
+  { name: 'a', id: '001' },
+  { name: 'b', id: '002' },
+  { name: 'c', id: '003' },
+  { name: 'd', id: '004' }
+];
+xo.find(obj, xo.partial(compare, '003')); // => { name: 'c', id: '003' }
+xo.find(objArr, xo.partial(compare, '003')); // => { name: 'c', id: '003' }
 ```
 
 ####flatten
