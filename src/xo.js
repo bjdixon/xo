@@ -10,7 +10,7 @@
    * @version 0.3.2
   */
   xo = {};
-  xo.VERSION = '0.3.2';
+  xo.VERSION = '0.4.0';
 
   function identity(x) {
     return x;

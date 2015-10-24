@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('coverage', ['jasmine:coverage']);
     grunt.registerTask('docs', ['jsdoc']);
-    grunt.registerTask('build', ['jshint', 'uglify', 'jsdoc']);
+    grunt.registerTask('build', ['jshint', 'uglify']);
 
 };
 

@@ -3,7 +3,7 @@
 [![Dependency Status](https://david-dm.org/bjdixon/xo.svg)](https://david-dm.org/bjdixon/xo)
 [![devDependency Status](https://david-dm.org/bjdixon/xo/dev-status.svg)](https://david-dm.org/bjdixon/xo#info=devDependencies)
 
-Helper utils for working with functions and arrays in JavaScript. Full documentation at http://bjdixon.github.io/xo/
+Helper utils for working with functions, arrays and objects in JavaScript. Full documentation at http://bjdixon.github.io/xo/
 
 ## Introduction
 xo is essentially a stripped down version of an underscore/lodash type library. I've only implemented the functions that I use the most and those that can be used to create the remaining functions from these types of library.

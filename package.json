@@ -1,7 +1,7 @@
 {
   "name": "xo-utils",
-  "version": "0.3.2",
-  "description": "Helper utilities for working with functions and arrays",
+  "version": "0.4.0",
+  "description": "Helper utilities for working with functions, arrays and objects",
   "main": "src/xo.js",
   "author": "bjdixon",
   "dependencies": {},
