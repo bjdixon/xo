@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/bjdixon/xo.svg?branch=master)](https://travis-ci.org/bjdixon/xo)
-[![Coverage Status](https://coveralls.io/repos/bjdixon/xo/badge.svg?branch=master&service=github)](https://coveralls.io/github/bjdixon/xo?branch=master)
+[![Coverage Status](https://coveralls.io/repos/bjdixon/xo/badge.svg?branch=master&service=github)](https://coveralls.io/github/bjdixon/xo?branch=v2)
 [![Dependency Status](https://david-dm.org/bjdixon/xo.svg)](https://david-dm.org/bjdixon/xo)
 [![devDependency Status](https://david-dm.org/bjdixon/xo/dev-status.svg)](https://david-dm.org/bjdixon/xo#info=devDependencies)
 
 Helper utils for working with functions, arrays and objects in JavaScript. Full documentation at http://bjdixon.github.io/xo/
 
 ## Introduction
-xo is essentially a stripped down version of an underscore/lodash type library. I've only implemented the functions that I use the most and those that can be used to create the remaining functions from these types of library.
+xo is a library I use to work with functions, arrays and objects in JavaScript.
 
 ##Source code
 The source is available at:
@@ -32,6 +32,8 @@ npm install xo-utils
 
 ```javascript
 var xo = require('xo-utils');
+
+var partial = require('xo-utils').partial;
 ```
 
 ##Contains

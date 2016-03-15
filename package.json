@@ -1,12 +1,12 @@
 {
   "name": "xo-utils",
-  "version": "0.4.0",
+  "version": "2.0.0",
   "description": "Helper utilities for working with functions, arrays and objects",
   "main": "src/xo.js",
   "author": "bjdixon",
   "dependencies": {},
   "engines": {
-    "node": "0.10.36"
+    "node": "4.2.4"
   },
   "directories": {
     "test": "tests"
