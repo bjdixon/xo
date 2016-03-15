@@ -1,15 +1,14 @@
 (function () {
   "use strict";
 
-  var root = this,
+  const root = this,
     previous_xo = root.xo,
-    xo;
+    xo = {};
 
   /**
    * @namespace xo
    * @version 0.3.2
   */
-  xo = {};
   xo.VERSION = '0.4.0';
 
   function identity(x) {
@@ -17,7 +16,7 @@
   }
 
   function is(type) {
-    var fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
+    const fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
     if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
       type = type.toLowerCase();
       return function(test) {
@@ -148,9 +147,9 @@
    * @return {Function}
   */
   xo.partial = function(fn) {
-    var initialArgs = Array.prototype.slice.call(arguments, 1);
+    const initialArgs = Array.prototype.slice.call(arguments, 1);
     return function() {
-      var remainingArgs = Array.prototype.slice.call(arguments);
+      const remainingArgs = Array.prototype.slice.call(arguments);
       return fn.apply(this, initialArgs.concat(remainingArgs));
     };
   };
@@ -169,7 +168,7 @@
    * @return {Array}
   */
   xo.flatten = function(arr) {
-    var output = [];
+    let output = [];
     arr.forEach(function(val) {
       output = output.concat(Array.isArray(val) ? xo.flatten(val) : val);
     });
@@ -199,7 +198,7 @@
    * @return {Array}
   */
   xo.filter = function(arr, predicate) {
-    var result = [],
+    let result = [],
       idx,
       len;
     for (idx = 0, len = arr.length; idx < len; idx += 1) {
@@ -250,7 +249,7 @@
    * @return {Number}
   */
   xo.findIndex = function(arr, predicate) {
-    var idx,
+    let idx,
       len;
     for (idx = 0, len = arr.length; idx < len; idx += 1) {
       if (predicate(arr[idx])) {
@@ -283,7 +282,7 @@
    * @return {String}
   */
   xo.findKey = function(obj, predicate) {
-    for (var prop in obj) {
+    for (let prop in obj) {
       if (obj.hasOwnProperty(prop) && predicate(obj[prop])) {
         return prop;
       }
@@ -341,9 +340,9 @@
    * @return {Function}
   */
   xo.memoize = function(fn) {
-    var cache = {};
+    let cache = {};
     return function() {
-      var key = JSON.stringify(arguments);
+      const key = JSON.stringify(arguments);
       return cache[key] || (cache[key] = fn.apply(this, arguments));
     };
   };
@@ -368,7 +367,7 @@
   */
   xo.maybe = function(fn) {
     return function() {
-      var args = Array.prototype.slice.call(arguments);
+      const args = Array.prototype.slice.call(arguments);
       if (!args.length || args.some(function(val) { return val == null; })) {
         return;
       }
