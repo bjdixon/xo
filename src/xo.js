@@ -19,14 +19,10 @@
     const fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function'];
     if (fastTypes.indexOf(type.toLowerCase()) >= 0) {
       type = type.toLowerCase();
-      return function(test) {
-        return typeof test === type;
-      };
+      return (test) => typeof test === type;
     }
     type = '[object ' + type + ']';
-    return function(test) {
-      return Object.prototype.toString.call(test) === type;
-    };
+    return (test) =>  Object.prototype.toString.call(test) === type;
   }
 
   /**
