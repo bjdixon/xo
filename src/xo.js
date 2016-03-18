@@ -119,7 +119,7 @@
    * @name xo.noConflict
    * @return {Object}
   */
-  xo.noConflict = function() {
+  xo.noConflict = () => {
     root.xo = previous_xo;
     return xo;
   };
@@ -142,9 +142,9 @@
    * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
    * @return {Function}
   */
-  xo.partial = function(fn) {
+  xo.partial = function (fn) {
     const initialArgs = Array.prototype.slice.call(arguments, 1);
-    return function() {
+    return function () {
       const remainingArgs = Array.prototype.slice.call(arguments);
       return fn.apply(this, initialArgs.concat(remainingArgs));
     };
@@ -163,9 +163,9 @@
    * @param {Array} arr - The array that will be recursively flattened
    * @return {Array}
   */
-  xo.flatten = function(arr) {
+  xo.flatten = (arr) => {
     let output = [];
-    arr.forEach(function(val) {
+    arr.forEach(function (val) {
       output = output.concat(Array.isArray(val) ? xo.flatten(val) : val);
     });
     return output;
@@ -193,7 +193,7 @@
    * @param {Function} predicate - The function against which each element of the array will be tested
    * @return {Array}
   */
-  xo.filter = function(arr, predicate) {
+  xo.filter = (arr, predicate) => {
     let result = [],
       idx,
       len;
@@ -218,7 +218,7 @@
    * @param {Array} arr - The array containing the elements to test
    * @return {Array}
   */
-  xo.compact = function(arr) {
+  xo.compact = (arr) => {
     return xo.filter(arr, identity);
   };
 
@@ -244,7 +244,7 @@
    * @param {Function} predicate - The function against which each element of the array will be tested
    * @return {Number}
   */
-  xo.findIndex = function(arr, predicate) {
+  xo.findIndex = (arr, predicate) => {
     let idx,
       len;
     for (idx = 0, len = arr.length; idx < len; idx += 1) {
@@ -277,7 +277,7 @@
    * @param {Function} predicate - The function against which each property of the object will be tested
    * @return {String}
   */
-  xo.findKey = function(obj, predicate) {
+  xo.findKey = (obj, predicate) => {
     for (let prop in obj) {
       if (obj.hasOwnProperty(prop) && predicate(obj[prop])) {
         return prop;
@@ -308,7 +308,7 @@
    * @param {Function} predicate - The function against which each property of the collection will be tested
    * @return {String} {Number}
   */
-  xo.find = function(collection, predicate) {
+  xo.find = (collection, predicate) => {
     if (xo.isArray(collection)) {
       return collection[xo.findIndex(collection, predicate)];
     }
@@ -335,9 +335,9 @@
    * @param {Function} fn - The (expensive) function that will have it's return values cached
    * @return {Function}
   */
-  xo.memoize = function(fn) {
+  xo.memoize = (fn) => {
     let cache = {};
-    return function() {
+    return function () {
       const key = JSON.stringify(arguments);
       return cache[key] || (cache[key] = fn.apply(this, arguments));
     };
@@ -361,10 +361,10 @@
    * @param {Function} fn - The function to be invoked
    * @return {Function}
   */
-  xo.maybe = function(fn) {
-    return function() {
+  xo.maybe = (fn) => {
+    return function () {
       const args = Array.prototype.slice.call(arguments);
-      if (!args.length || args.some(function(val) { return val == null; })) {
+      if (!args.length || args.some(function (val) { return val == null; })) {
         return;
       }
       return fn.apply(this, args);
