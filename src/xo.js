@@ -165,9 +165,7 @@
   */
   xo.flatten = (arr) => {
     let output = [];
-    arr.forEach(function (val) {
-      output = output.concat(Array.isArray(val) ? xo.flatten(val) : val);
-    });
+    arr.forEach((val) => output = output.concat(Array.isArray(val) ? xo.flatten(val) : val));
     return output;
   };
 
@@ -364,7 +362,7 @@
   xo.maybe = (fn) => {
     return function () {
       const args = Array.prototype.slice.call(arguments);
-      if (!args.length || args.some(function (val) { return val == null; })) {
+      if (!args.length || args.some((val) => val == null)) {
         return;
       }
       return fn.apply(this, args);
