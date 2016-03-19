@@ -113,7 +113,7 @@
    * Allows users to avoid conflicts over the xo name
    *
    * @example
-   * var ox = xo.noConflict();
+   * const ox = xo.noConflict();
    *
    * @function
    * @name xo.noConflict
@@ -129,11 +129,11 @@
    * Returns a function that can be invoked with remaining arguments at a later time
    *
    * @example
-   * var greet = function(greeting, name) {
+   * const greet = function(greeting, name) {
    *   return [greeting, name].join(' ');
    * };
    *
-   * var sayHi = xo.partial(greet, 'Hi');
+   * const sayHi = xo.partial(greet, 'Hi');
    * sayHi('Bob'); // "Hi Bob"
    *
    * @function
@@ -155,7 +155,7 @@
    * Returns a flattened 1-dimensional array. 
    *
    * @example
-   * var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+   * const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
    * xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
    *
    * @function
@@ -177,7 +177,7 @@
    * function compare(id, obj) {
    *   return id === obj.id;
    * }
-   * var objArr = [
+   * const objArr = [
    *   { name: 'a', id: '001' },
    *   { name: 'b', id: '003' },
    *   { name: 'c', id: '003' },
@@ -208,7 +208,7 @@
    * Returns an array with all falsy values removed
    *
    * @example
-   * var test = [1, , false, 2, 3, false];
+   * const test = [1, , false, 2, 3, false];
    * xo.compact(test); // [1, 2, 3]
    *
    * @function
@@ -228,7 +228,7 @@
    * function compare(id, obj) {
    *   return id === obj.id;
    * }
-   * var objArr = [
+   * const objArr = [
    *   { name: 'a', id: '001' },
    *   { name: 'b', id: '002' },
    *   { name: 'c', id: '003' },
@@ -261,7 +261,7 @@
    * function compare(id, obj) {
    *   return id === obj.id;
    * }
-   * var obj = {
+   * const obj = {
    *   hello: { name: 'a', id: '001' },
    *   goodbye: { name: 'b', id: '002' },
    *   yes: { name: 'c', id: '003' },
@@ -292,7 +292,7 @@
    * function compare(id, obj) {
    *   return id === obj.id;
    * }
-   * var obj = {
+   * const obj = {
    *   hello: { name: 'a', id: '001' },
    *   goodbye: { name: 'b', id: '002' },
    *   yes: { name: 'c', id: '003' },
@@ -321,10 +321,10 @@
    * arguments have been provided during previous invocations.
    *
    * @example
-   * var upper = function(str) {
+   * const upper = function(str) {
    *   return str.toUpperCase();
    * };
-   * var memoUpper = xo.memoize(upper);
+   * const memoUpper = xo.memoize(upper);
    * memoUpper('foo'); // "FOO"
    * memoUpper('foo'); // "FOO" (cached version)
    *
@@ -347,10 +347,10 @@
    * or undefined arguments
    * 
    * @example
-   * var sum = function(a, b) {
+   * const sum = function(a, b) {
    *   return a + b;
    * }
-   * var maybeSum = xo.maybe(sum);
+   * const maybeSum = xo.maybe(sum);
    * maybeSum(2, 3); // 5
    * maybeSum(null, 3); // doesn't invoke sum
    *
