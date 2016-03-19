@@ -129,9 +129,7 @@
    * Returns a function that can be invoked with remaining arguments at a later time
    *
    * @example
-   * const greet = function(greeting, name) {
-   *   return [greeting, name].join(' ');
-   * };
+   * const greet = (greeting, name) => [greeting, name].join(' ');
    *
    * const sayHi = xo.partial(greet, 'Hi');
    * sayHi('Bob'); // "Hi Bob"
@@ -321,9 +319,8 @@
    * arguments have been provided during previous invocations.
    *
    * @example
-   * const upper = function(str) {
-   *   return str.toUpperCase();
-   * };
+   * const upper = (str) => str.toUpperCase();
+   *
    * const memoUpper = xo.memoize(upper);
    * memoUpper('foo'); // "FOO"
    * memoUpper('foo'); // "FOO" (cached version)
@@ -347,9 +344,8 @@
    * or undefined arguments
    * 
    * @example
-   * const sum = function(a, b) {
-   *   return a + b;
-   * }
+   * const sum = (a, b) => a + b;
+   *
    * const maybeSum = xo.maybe(sum);
    * maybeSum(2, 3); // 5
    * maybeSum(null, 3); // doesn't invoke sum
