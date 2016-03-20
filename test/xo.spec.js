@@ -434,6 +434,16 @@ describe('xo.isFunction', function() {
     expect(xo.isFunction(func)).toEqual(true);
   });
 
+  it('returns true for 1 statement fat arrow functions', function() {
+    var func = () => true;
+    expect(xo.isFunction(func)).toEqual(true);
+  });
+
+  it('returns true for multi-statement fat arrow functions', function() {
+    var func = () => { let x = 1; return true; };
+    expect(xo.isFunction(func)).toEqual(true);
+  });
+
   it('returns false for non functions', function() {
     var notFunction = true;
     expect(xo.isFunction(notFunction)).toEqual(false);
