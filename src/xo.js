@@ -9,7 +9,7 @@
    * @namespace xo
    * @version 0.3.2
   */
-  xo.VERSION = '0.4.0';
+  xo.VERSION = '2.0.0';
 
   function identity(x) {
     return x;
