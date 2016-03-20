@@ -37,8 +37,23 @@ describe('xo.memoize', function() {
     expect(memoUpper('foo')).toEqual(upper('foo'));
   });
 
+  it('returns same value as non memoized fat arrow functions (single argument)', function() {
+    var upper = (str) => str.toUpperCase();
+    var memoUpper = xo.memoize(upper);
+    expect(memoUpper('foo')).toEqual(upper('foo'));
+  });
+
   it('returns same value as non memoized functions (multiple arguments)', function() {
     var id = function(str1, str2, str3) {
+      var args = Array.prototype.slice.call(arguments);
+      return args.join(', ');
+    };
+    var memoId = xo.memoize(id);
+    expect(memoId('foo', 'bar', 'baz')).toEqual(id('foo', 'bar', 'baz'));
+  });
+
+  it('returns same value as non memoized fat arrow functions (multiple arguments)', function() {
+    var id = (str1, str2, str3) => {
       var args = Array.prototype.slice.call(arguments);
       return args.join(', ');
     };
