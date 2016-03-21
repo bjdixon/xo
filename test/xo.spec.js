@@ -143,10 +143,14 @@ describe('xo.partial', function() {
     expect(hi('Bob')).toEqual('hi Bob');
   });
 
-  it('takes a function and an argument when initializing and a final argument when invoking', function() {
-    var greet = function(greeting, name) {
-      return greeting + ' ' + name;
-    };
+  it('takes a fat arrow function when initializing and an argument when invoking', function() {
+    var greet = (name) => 'hi ' + name;
+    var hi = xo.partial(greet);
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function and an argument when initializing and a final argument when invoking', function() {
+    var greet = (greeting, name) => greeting + ' ' + name;
     var hi = xo.partial(greet, 'hi');
     expect(hi('Bob')).toEqual('hi Bob');
   });
@@ -155,6 +159,12 @@ describe('xo.partial', function() {
     var greet = function(greeting, name) {
       return greeting + ' ' + name;
     };
+    var hi = xo.partial(greet);
+    expect(hi('hi', 'Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function when initializing and multiple arguments when invoking', function() {
+    var greet = (greeting, name) => greeting + ' ' + name;
     var hi = xo.partial(greet);
     expect(hi('hi', 'Bob')).toEqual('hi Bob');
   });
