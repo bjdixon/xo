@@ -486,10 +486,22 @@ describe('xo.maybe', function() {
     expect(xo.isNumber(maybeSum(2, 3))).toEqual(true);
   });
 
+  it('invokes a fat arrow function if it has truthy arguments', function() {
+    const sum = (a, b) => a + b;
+    var maybeSum = xo.maybe(sum);
+    expect(xo.isNumber(maybeSum(2, 3))).toEqual(true);
+  });
+
   it('doesn\'t invoke a function if it has zero arguments', function() {
     function sum(a, b) {
       return a + b;
     }
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum()).toEqual(undefined);
+  });
+
+  it('doesn\'t invoke a fat arrow function if it has zero arguments', function() {
+    const sum = (a, b) => a + b;
     var maybeSum = xo.maybe(sum);
     expect(maybeSum()).toEqual(undefined);
   });
@@ -502,10 +514,22 @@ describe('xo.maybe', function() {
     expect(maybeSum(null, 4)).toEqual(undefined);
   });
 
+  it('doesn\'t invoke a fat arrow function if it has null arguments', function() {
+    const sum = (a, b) => a + b;
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum(null, 4)).toEqual(undefined);
+  });
+
   it('doesn\'t invoke a function if it has undefined arguments', function() {
     function sum(a, b) {
       return a + b;
     }
+    var maybeSum = xo.maybe(sum);
+    expect(maybeSum(4, undefined)).toEqual(undefined);
+  });
+
+  it('doesn\'t invoke a fat arrow function if it has undefined arguments', function() {
+    const sum = (a, b) => a + b;
     var maybeSum = xo.maybe(sum);
     expect(maybeSum(4, undefined)).toEqual(undefined);
   });
