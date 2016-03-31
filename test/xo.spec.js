@@ -1,7 +1,5 @@
 'use strict';
-if(typeof xo === 'undefined') {
-  var xo = require('..');
-}
+const xo = require('..');
 
 describe('xo.VERSION', function() {
 
@@ -13,14 +11,14 @@ describe('xo.VERSION', function() {
 
 describe('xo.noConflict', function() {
 
-  var ox = xo.noConflict();
+  const ox = xo.noConflict();
 
   it('can be assigned to another namespace', function() {
     expect(ox.hasOwnProperty('memoize')).toEqual(true);
   });
 
   it('alternate namespace version can coexist with xo assigned a different value', function() {
-    var xo = { a: 1, b: 2 };
+    const xo = { a: 1, b: 2 };
     expect(ox.hasOwnProperty('flatten')).toEqual(true);
     expect(xo).toEqual({ a: 1, b: 2 });
   });
@@ -30,82 +28,82 @@ describe('xo.noConflict', function() {
 describe('xo.memoize', function() {
 
   it('returns same value as non memoized functions (single argument)', function() {
-    var upper = function(str) {
+    const upper = function(str) {
       return str.toUpperCase();
     };
-    var memoUpper = xo.memoize(upper);
+    const memoUpper = xo.memoize(upper);
     expect(memoUpper('foo')).toEqual(upper('foo'));
   });
 
   it('returns same value as non memoized fat arrow functions (single argument)', function() {
-    var upper = (str) => str.toUpperCase();
-    var memoUpper = xo.memoize(upper);
+    const upper = (str) => str.toUpperCase();
+    const memoUpper = xo.memoize(upper);
     expect(memoUpper('foo')).toEqual(upper('foo'));
   });
 
   it('returns same value as non memoized functions (multiple arguments)', function() {
-    var id = function(str1, str2, str3) {
-      var args = Array.prototype.slice.call(arguments);
+    const id = function(str1, str2, str3) {
+      const args = Array.prototype.slice.call(arguments);
       return args.join(', ');
     };
-    var memoId = xo.memoize(id);
+    const memoId = xo.memoize(id);
     expect(memoId('foo', 'bar', 'baz')).toEqual(id('foo', 'bar', 'baz'));
   });
 
   it('returns same value as non memoized fat arrow functions (multiple arguments)', function() {
-    var id = (str1, str2, str3) => {
-      var args = Array.prototype.slice.call(arguments);
+    const id = (str1, str2, str3) => {
+      const args = Array.prototype.slice.call(arguments);
       return args.join(', ');
     };
-    var memoId = xo.memoize(id);
+    const memoId = xo.memoize(id);
     expect(memoId('foo', 'bar', 'baz')).toEqual(id('foo', 'bar', 'baz'));
   });
 
   it('returns same value as non memoized functions (array argument)', function() {
-    var testArg = ['foo', 'bar', 'baz'];
-    var id = function(args) {
+    const testArg = ['foo', 'bar', 'baz'];
+    const id = function(args) {
       return args.join(', ');
     };
-    var memoId = xo.memoize(id);
+    const memoId = xo.memoize(id);
     expect(memoId(testArg)).toEqual(id(testArg));
   });
 
   it('returns same value as non memoized functions (object argument)', function() {
-    var testArg = { a: 'foo', b: { c:'bar', d: 'baz' }};
-    var id = function(args) {
+    const testArg = { a: 'foo', b: { c:'bar', d: 'baz' }};
+    const id = function(args) {
       return args.a + args.b.c + args.b.d;
     };
-    var memoId = xo.memoize(id);
+    const memoId = xo.memoize(id);
     expect(memoId(testArg)).toEqual(id(testArg));
   });
 
   it('returns cached value, doesn\'t run (expensive) function again', function() {
-    var testArg = { a: 'foo', b: { c: 1, d: 'baz' }};
-    var check = 0;
-    var id = function(args) {
+    const testArg = { a: 'foo', b: { c: 1, d: 'baz' }};
+    let check = 0;
+    const id = function(args) {
       check += 1;
       return args.b.c;
     };
-    var memoId = xo.memoize(id);
+    const memoId = xo.memoize(id);
     // Each time id() is invoked it will incremement check.
     // Using the memoized version we get the same return value as we would when invoking id()
     // but without invoking id() more than once (and incrementing check).
-    var test = memoId(testArg);
+    let test = memoId(testArg);
     test = memoId(testArg);
     test = memoId(testArg);
     expect(test).toEqual(check);
   });
 
   it('returns cached value, doesn\'t run (expensive) function again unless arguments change', function() {
-    var check = 0;
-    var upper = function(args) {
+    let check = 0;
+    const upper = function(args) {
       check += 1;
       return args.toUpperCase();
     };
-    var memoUpper = xo.memoize(upper);
-    var test1 = memoUpper('hello'); // check = 1
+    const memoUpper = xo.memoize(upper);
+    let test1 = memoUpper('hello'); // check = 1
     test1 = memoUpper('hello'); // check = 1
-    var test2 = memoUpper('world'); // check = 2
+    let test2 = memoUpper('world'); // check = 2
     test2 = memoUpper('world'); // check = 2
     test1 = memoUpper('hello'); // check = 2
     expect([test1, test2, check].join(' ')).toEqual('HELLO WORLD 2');
@@ -116,8 +114,8 @@ describe('xo.memoize', function() {
 describe('xo.flatten', function() {
 
   it('returns flattened array', function() {
-    var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
-    var result = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+    const result = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     expect(xo.flatten(test)).toEqual(result);
   });
 
@@ -126,8 +124,8 @@ describe('xo.flatten', function() {
 describe('xo.compact', function() {
 
   it('returns array with falsy values removed', function() {
-    var test = [1, , false, 2, , 3, false, 4, 5];
-    var result = [1, 2, 3, 4, 5];
+    const test = [1, , false, 2, , 3, false, 4, 5];
+    const result = [1, 2, 3, 4, 5];
     expect(xo.compact(test)).toEqual(result);
   });
 
@@ -136,36 +134,36 @@ describe('xo.compact', function() {
 describe('xo.partial', function() {
 
   it('takes a function when initializing and an argument when invoking', function() {
-    var greet = function(name) {
+    const greet = function(name) {
       return 'hi ' + name;
     };
-    var hi = xo.partial(greet);
+    const hi = xo.partial(greet);
     expect(hi('Bob')).toEqual('hi Bob');
   });
 
   it('takes a fat arrow function when initializing and an argument when invoking', function() {
-    var greet = (name) => 'hi ' + name;
-    var hi = xo.partial(greet);
+    const greet = (name) => 'hi ' + name;
+    const hi = xo.partial(greet);
     expect(hi('Bob')).toEqual('hi Bob');
   });
 
   it('takes a fat arrow function and an argument when initializing and a final argument when invoking', function() {
-    var greet = (greeting, name) => greeting + ' ' + name;
-    var hi = xo.partial(greet, 'hi');
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.partial(greet, 'hi');
     expect(hi('Bob')).toEqual('hi Bob');
   });
 
   it('takes a function when initializing and multiple arguments when invoking', function() {
-    var greet = function(greeting, name) {
+    const greet = function(greeting, name) {
       return greeting + ' ' + name;
     };
-    var hi = xo.partial(greet);
+    const hi = xo.partial(greet);
     expect(hi('hi', 'Bob')).toEqual('hi Bob');
   });
 
   it('takes a fat arrow function when initializing and multiple arguments when invoking', function() {
-    var greet = (greeting, name) => greeting + ' ' + name;
-    var hi = xo.partial(greet);
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.partial(greet);
     expect(hi('hi', 'Bob')).toEqual('hi Bob');
   });
 
@@ -177,8 +175,8 @@ describe('xo.partial', function() {
     Greet.prototype.speak = function() {
       return this.greeting + ' ' + this.name;
     };
-    var Hi = xo.partial(Greet, 'hi');
-    var hiBob = new Hi('Bob');
+    const Hi = xo.partial(Greet, 'hi');
+    const hiBob = new Hi('Bob');
     expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
   });
 
@@ -190,7 +188,7 @@ describe('xo.findIndex', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '002' },
       { name: 'c', id: '003' },
@@ -203,7 +201,7 @@ describe('xo.findIndex', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '002' },
       { name: 'c', id: '003' },
@@ -216,7 +214,7 @@ describe('xo.findIndex', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '003' },
       { name: 'c', id: '003' },
@@ -233,7 +231,7 @@ describe('xo.findKey', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '002' },
       yes: { name: 'c', id: '003' },
@@ -246,7 +244,7 @@ describe('xo.findKey', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '002' },
       yes: { name: 'c', id: '003' },
@@ -259,7 +257,7 @@ describe('xo.findKey', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '003' },
       yes: { name: 'c', id: '003' },
@@ -276,7 +274,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '002' },
       yes: { name: 'c', id: '003' },
@@ -289,7 +287,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '002' },
       yes: { name: 'c', id: '003' },
@@ -302,7 +300,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var obj = {
+    const obj = {
       hello: { name: 'a', id: '001' },
       goodbye: { name: 'b', id: '003' },
       yes: { name: 'c', id: '003' },
@@ -315,7 +313,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '002' },
       { name: 'c', id: '003' },
@@ -328,7 +326,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '002' },
       { name: 'c', id: '003' },
@@ -341,7 +339,7 @@ describe('xo.find', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '003' },
       { name: 'c', id: '003' },
@@ -358,7 +356,7 @@ describe('xo.filter', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '003' },
       { name: 'c', id: '003' },
@@ -371,7 +369,7 @@ describe('xo.filter', function() {
     function compare(id, obj) {
       return id === obj.id;
     }
-    var objArr = [
+    const objArr = [
       { name: 'a', id: '001' },
       { name: 'b', id: '002' },
       { name: 'c', id: '003' },
@@ -385,12 +383,12 @@ describe('xo.filter', function() {
 describe('xo.isBoolean', function() {
 
   it('returns true for booleans', function() {
-    var bool = false;
+    const bool = false;
     expect(xo.isBoolean(bool)).toEqual(true);
   });
 
   it('returns false for non booleans', function() {
-    var notBool = 'true';
+    const notBool = 'true';
     expect(xo.isBoolean(notBool)).toEqual(false);
   });
 
@@ -399,12 +397,12 @@ describe('xo.isBoolean', function() {
 describe('xo.isNumber', function() {
 
   it('returns true for numbers', function() {
-    var number = 3;
+    const number = 3;
     expect(xo.isNumber(number)).toEqual(true);
   });
 
   it('returns false for non numbers', function() {
-    var notNumber = '3';
+    const notNumber = '3';
     expect(xo.isNumber(notNumber)).toEqual(false);
   });
 
@@ -413,12 +411,12 @@ describe('xo.isNumber', function() {
 describe('xo.isString', function() {
 
   it('returns true for strings', function() {
-    var string  = '42';
+    const string  = '42';
     expect(xo.isString(string)).toEqual(true);
   });
 
   it('returns false for non strings', function() {
-    var notString = true;
+    const notString = true;
     expect(xo.isString(notString)).toEqual(false);
   });
 
@@ -427,12 +425,12 @@ describe('xo.isString', function() {
 describe('xo.isObject', function() {
 
   it('returns true for objects', function() {
-    var object = {a: '1', b: '2'};
+    const object = {a: '1', b: '2'};
     expect(xo.isObject(object)).toEqual(true);
   });
 
   it('returns false for non objects', function() {
-    var notObject = true;
+    const notObject = true;
     expect(xo.isObject(notObject)).toEqual(false);
   });
 
@@ -441,12 +439,12 @@ describe('xo.isObject', function() {
 describe('xo.isArray', function() {
 
   it('returns true for arrays', function() {
-    var array = [1, 2, 3];
+    const array = [1, 2, 3];
     expect(xo.isArray(array)).toEqual(true);
   });
 
   it('returns false for non arrays', function() {
-    var notArray= true;
+    const notArray= true;
     expect(xo.isArray(notArray)).toEqual(false);
   });
 
@@ -455,22 +453,22 @@ describe('xo.isArray', function() {
 describe('xo.isFunction', function() {
 
   it('returns true for functions', function() {
-    var func = function() { return true; };
+    const func = function() { return true; };
     expect(xo.isFunction(func)).toEqual(true);
   });
 
   it('returns true for 1 statement fat arrow functions', function() {
-    var func = () => true;
+    const func = () => true;
     expect(xo.isFunction(func)).toEqual(true);
   });
 
   it('returns true for multi-statement fat arrow functions', function() {
-    var func = () => { let x = 1; return true; };
+    const func = () => { let x = 1; return true; };
     expect(xo.isFunction(func)).toEqual(true);
   });
 
   it('returns false for non functions', function() {
-    var notFunction = true;
+    const notFunction = true;
     expect(xo.isFunction(notFunction)).toEqual(false);
   });
 
@@ -482,13 +480,13 @@ describe('xo.maybe', function() {
     function sum(a, b) {
       return a + b;
     }
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(xo.isNumber(maybeSum(2, 3))).toEqual(true);
   });
 
   it('invokes a fat arrow function if it has truthy arguments', function() {
     const sum = (a, b) => a + b;
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(xo.isNumber(maybeSum(2, 3))).toEqual(true);
   });
 
@@ -496,13 +494,13 @@ describe('xo.maybe', function() {
     function sum(a, b) {
       return a + b;
     }
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum()).toEqual(undefined);
   });
 
   it('doesn\'t invoke a fat arrow function if it has zero arguments', function() {
     const sum = (a, b) => a + b;
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum()).toEqual(undefined);
   });
 
@@ -510,13 +508,13 @@ describe('xo.maybe', function() {
     function sum(a, b) {
       return a + b;
     }
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum(null, 4)).toEqual(undefined);
   });
 
   it('doesn\'t invoke a fat arrow function if it has null arguments', function() {
     const sum = (a, b) => a + b;
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum(null, 4)).toEqual(undefined);
   });
 
@@ -524,13 +522,13 @@ describe('xo.maybe', function() {
     function sum(a, b) {
       return a + b;
     }
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum(4, undefined)).toEqual(undefined);
   });
 
   it('doesn\'t invoke a fat arrow function if it has undefined arguments', function() {
     const sum = (a, b) => a + b;
-    var maybeSum = xo.maybe(sum);
+    const maybeSum = xo.maybe(sum);
     expect(maybeSum(4, undefined)).toEqual(undefined);
   });
 
