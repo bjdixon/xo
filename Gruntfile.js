@@ -10,13 +10,24 @@ module.exports = function(grunt) {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint']
         },
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['es2015']
+            },
+            dist: {
+                files: {
+                    'dist/xo.js': 'src/xo.js'
+                }
+            }
+        },
         uglify: {
             options: {
                 screwIE8: true
             },
             my_target: {
                 files: {
-                    'dist/xo.min.js': ['src/xo.js']
+                    'dist/xo.min.js': ['dist/xo.js']
                 }
             }
         },
@@ -60,12 +71,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-babel');
 
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('coverage', ['jasmine:coverage']);
     grunt.registerTask('docs', ['jsdoc']);
-    grunt.registerTask('build', ['jshint', 'uglify']);
+    grunt.registerTask('build', ['jshint', 'babel', 'uglify']);
 
 };
 
