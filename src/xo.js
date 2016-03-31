@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   const root = this,
     previous_xo = root.xo,

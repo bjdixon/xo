@@ -124,7 +124,7 @@ describe('xo.flatten', function() {
 describe('xo.compact', function() {
 
   it('returns array with falsy values removed', function() {
-    const test = [1, , false, 2, , 3, false, 4, 5];
+    const test = [1, undefined, false, 2, undefined, 3, false, 4, 5];
     const result = [1, 2, 3, 4, 5];
     expect(xo.compact(test)).toEqual(result);
   });
@@ -463,7 +463,7 @@ describe('xo.isFunction', function() {
   });
 
   it('returns true for multi-statement fat arrow functions', function() {
-    const func = () => { let x = 1; return true; };
+    const func = () => { let x = 1; return x; };
     expect(xo.isFunction(func)).toEqual(true);
   });
 
