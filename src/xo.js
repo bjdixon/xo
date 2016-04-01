@@ -365,6 +365,35 @@
     };
   };
 
+  /**
+   * Takes functions and returns a function.
+   * The returned function when invoked will invoke each function
+   * that was supplied as an argument to compose passing the result of
+   * each invocation as the argument to the next function
+   *
+   * @example
+   * const increment = (a) => a + 1;
+   * const square = (a) => a * a;
+   *
+   * const squarePlusOne = xo.compose(increment, square);
+   * squarePlusOne(3); // 10
+   *
+   * @function
+   * @name xo.compose
+   * @param {Function} [fns] - The functions to be composed
+   * @return {Function}
+  */
+  xo.compose = function () {
+    let funcs = Array.prototype.slice.call(arguments);
+    return function () {
+      let args = arguments;
+      while (funcs.length) {
+        args = [funcs.pop().apply(this, args)];
+      }
+      return args[0];
+    };
+  };
+
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = xo; // jshint ignore:line

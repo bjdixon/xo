@@ -534,3 +534,14 @@ describe('xo.maybe', function() {
 
 });
 
+describe('xo.compose', function() {
+
+  it('invokes the composed functions in reverse order', function() {
+    const increment = (a) => a + 1;
+    const square = (a) => a * a;
+    const squarePlusOne = xo.compose(increment, square);
+    expect(squarePlusOne(3)).toEqual(10);
+  });
+
+});
+
