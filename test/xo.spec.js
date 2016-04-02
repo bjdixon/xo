@@ -182,6 +182,57 @@ describe('xo.partial', function() {
 
 });
 
+describe('xo.curry', function() {
+
+  it('takes a function when initializing and an argument when invoking', function() {
+    const greet = function(name) {
+      return 'hi ' + name;
+    };
+    const hi = xo.curry(greet);
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function when initializing and an argument when invoking', function() {
+    const greet = (name) => 'hi ' + name;
+    const hi = xo.curry(greet);
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function and an argument when initializing and a final argument when invoking', function() {
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.curry(greet, 'hi');
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a function when initializing and multiple arguments when invoking', function() {
+    const greet = function(greeting, name) {
+      return greeting + ' ' + name;
+    };
+    const hi = xo.curry(greet);
+    expect(hi('hi', 'Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function when initializing and multiple arguments when invoking', function() {
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.curry(greet);
+    expect(hi('hi', 'Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a function when initializing an argument and context when invoking', function() {
+    function Greet(greeting, name) {
+      this.greeting = greeting;
+      this.name = name;
+    }
+    Greet.prototype.speak = function() {
+      return this.greeting + ' ' + this.name;
+    };
+    const Hi = xo.curry(Greet, 'hi');
+    const hiBob = new Hi('Bob');
+    expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
+  });
+
+});
+
 describe('xo.findIndex', function() {
 
   it('returns correct index of object where property is found', function() {

@@ -143,10 +143,11 @@
   xo.partial = function (fn) {
     const initialArgs = Array.prototype.slice.call(arguments, 1);
     return function () {
-      const remainingArgs = Array.prototype.slice.call(arguments);
-      return fn.apply(this, initialArgs.concat(remainingArgs));
+      return fn.apply(this, initialArgs.concat(Array.prototype.slice.call(arguments)));
     };
   };
+
+  xo.curry = xo.partial;
 
   /**
    * Takes an n-dimensional nested array.
