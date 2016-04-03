@@ -131,57 +131,6 @@ describe('xo.compact', function() {
 
 });
 
-describe('xo.partial', function() {
-
-  it('takes a function when initializing and an argument when invoking', function() {
-    const greet = function(name) {
-      return 'hi ' + name;
-    };
-    const hi = xo.partial(greet);
-    expect(hi('Bob')).toEqual('hi Bob');
-  });
-
-  it('takes a fat arrow function when initializing and an argument when invoking', function() {
-    const greet = (name) => 'hi ' + name;
-    const hi = xo.partial(greet);
-    expect(hi('Bob')).toEqual('hi Bob');
-  });
-
-  it('takes a fat arrow function and an argument when initializing and a final argument when invoking', function() {
-    const greet = (greeting, name) => greeting + ' ' + name;
-    const hi = xo.partial(greet, 'hi');
-    expect(hi('Bob')).toEqual('hi Bob');
-  });
-
-  it('takes a function when initializing and multiple arguments when invoking', function() {
-    const greet = function(greeting, name) {
-      return greeting + ' ' + name;
-    };
-    const hi = xo.partial(greet);
-    expect(hi('hi', 'Bob')).toEqual('hi Bob');
-  });
-
-  it('takes a fat arrow function when initializing and multiple arguments when invoking', function() {
-    const greet = (greeting, name) => greeting + ' ' + name;
-    const hi = xo.partial(greet);
-    expect(hi('hi', 'Bob')).toEqual('hi Bob');
-  });
-
-  it('takes a function when initializing an argument and context when invoking', function() {
-    function Greet(greeting, name) {
-      this.greeting = greeting;
-      this.name = name;
-    }
-    Greet.prototype.speak = function() {
-      return this.greeting + ' ' + this.name;
-    };
-    const Hi = xo.partial(Greet, 'hi');
-    const hiBob = new Hi('Bob');
-    expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
-  });
-
-});
-
 describe('xo.curry', function() {
 
   it('takes a function when initializing and an argument when invoking', function() {
@@ -245,7 +194,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.findIndex(objArr, xo.partial(compare, '003'))).toEqual(2);
+    expect(xo.findIndex(objArr, xo.curry(compare, '003'))).toEqual(2);
   });
 
   it('returns -1 when no match is made', function() {
@@ -258,7 +207,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.findIndex(objArr, xo.partial(compare, '005'))).toEqual(-1);
+    expect(xo.findIndex(objArr, xo.curry(compare, '005'))).toEqual(-1);
   });
 
   it('returns index of first occurence when multiple matches can be made', function() {
@@ -271,7 +220,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '003' }
     ];
-    expect(xo.findIndex(objArr, xo.partial(compare, '003'))).toEqual(1);
+    expect(xo.findIndex(objArr, xo.curry(compare, '003'))).toEqual(1);
   });
 
 });
@@ -288,7 +237,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.partial(compare, '003'))).toEqual('yes');
+    expect(xo.findKey(obj, xo.curry(compare, '003'))).toEqual('yes');
   });
 
   it('returns null when no match is made', function() {
@@ -301,7 +250,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.partial(compare, '005'))).toEqual(null);
+    expect(xo.findKey(obj, xo.curry(compare, '005'))).toEqual(null);
   });
 
   it('returns key of first occurence when multiple matches can be made', function() {
@@ -314,7 +263,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.partial(compare, '003'))).toEqual('goodbye');
+    expect(xo.findKey(obj, xo.curry(compare, '003'))).toEqual('goodbye');
   });
 
 });
@@ -331,7 +280,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.partial(compare, '003'))).toEqual({ name: 'c', id: '003' });
+    expect(xo.find(obj, xo.curry(compare, '003'))).toEqual({ name: 'c', id: '003' });
   });
 
   it('returns null when no match is made', function() {
@@ -344,7 +293,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.partial(compare, '005'))).toEqual(null);
+    expect(xo.find(obj, xo.curry(compare, '005'))).toEqual(null);
   });
 
   it('returns value of first occurence when multiple matches can be made', function() {
@@ -357,7 +306,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.partial(compare, '003'))).toEqual({ name: 'b', id: '003' });
+    expect(xo.find(obj, xo.curry(compare, '003'))).toEqual({ name: 'b', id: '003' });
   });
 
   it('returns correct value of array where value is found', function() {
@@ -370,7 +319,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.partial(compare, '003'))).toEqual({ name: 'c', id: '003' });
+    expect(xo.find(objArr, xo.curry(compare, '003'))).toEqual({ name: 'c', id: '003' });
   });
 
   it('returns null when no match is made', function() {
@@ -383,7 +332,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.partial(compare, '005'))).toEqual(null);
+    expect(xo.find(objArr, xo.curry(compare, '005'))).toEqual(null);
   });
 
   it('returns value of first occurence when multiple matches can be made', function() {
@@ -396,7 +345,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.partial(compare, '003'))).toEqual({ name: 'b', id: '003' });
+    expect(xo.find(objArr, xo.curry(compare, '003'))).toEqual({ name: 'b', id: '003' });
   });
 
 });
@@ -413,7 +362,7 @@ describe('xo.filter', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.filter(objArr, xo.partial(compare, '003')).length).toEqual(2);
+    expect(xo.filter(objArr, xo.curry(compare, '003')).length).toEqual(2);
   });
 
   it('returns empty array when no match is made', function() {
@@ -426,7 +375,7 @@ describe('xo.filter', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.filter(objArr, xo.partial(compare, '005'))).toEqual([]);
+    expect(xo.filter(objArr, xo.curry(compare, '005'))).toEqual([]);
   });
 
 });
@@ -589,15 +538,15 @@ describe('xo.compose', function() {
 
   it('invokes the composed functions in reverse order', function() {
     const increment = (a) => a + 1;
-    const square = (a) => a + a;
+    const square = (a) => a * a;
     const squarePlusOne = xo.compose(increment, square);
-    expect(squarePlusOne(3)).toEqual(7);
+    expect(squarePlusOne(3)).toEqual(10);
   });
 
   it('is associative', function() {
     const increment = (a) => a + 1;
-    const square = (a) => a + a;
-    const cube = (a) => a * 3;
+    const square = (a) => a * a;
+    const cube = (a) => a * a * a;
     expect(xo.compose(increment, square, cube)(3)).toEqual(xo.compose(xo.compose(increment, square), cube)(3));
   });
 

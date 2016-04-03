@@ -131,23 +131,22 @@
    * @example
    * const greet = (greeting, name) => [greeting, name].join(' ');
    *
-   * const sayHi = xo.partial(greet, 'Hi');
+   * const sayHi = xo.curry(greet, 'Hi');
    * sayHi('Bob'); // "Hi Bob"
    *
    * @function
-   * @name xo.partial
+   * @name xo.curry
    * @param {Function} fn - Partially apply this function prefilling some arguments
    * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
    * @return {Function}
   */
-  xo.partial = function (fn) {
+  xo.curry = function (fn) {
     const initialArgs = Array.prototype.slice.call(arguments, 1);
     return function () {
       return fn.apply(this, initialArgs.concat(Array.prototype.slice.call(arguments)));
     };
   };
 
-  xo.curry = xo.partial;
 
   /**
    * Takes an n-dimensional nested array.
@@ -182,7 +181,7 @@
    *   { name: 'c', id: '003' },
    *   { name: 'd', id: '004' }
    * ];
-   * xo.filter(objArr, xo.partial(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
+   * xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
    *
    * @function
    * @name xo.filter
@@ -233,7 +232,7 @@
    *   { name: 'c', id: '003' },
    *   { name: 'd', id: '004' }
    * ];
-   * xo.findIndex(objArr, xo.partial(compare, '003')); // 2
+   * xo.findIndex(objArr, xo.curry(compare, '003')); // 2
    *
    * @function
    * @name xo.findIndex
@@ -266,7 +265,7 @@
    *   yes: { name: 'c', id: '003' },
    *   no: { name: 'd', id: '004' }
    * };
-   * xo.findKey(obj, xo.partial(compare, '003')); // yes 
+   * xo.findKey(obj, xo.curry(compare, '003')); // yes 
    *
    * @function
    * @name xo.findKey
@@ -297,7 +296,7 @@
    *   yes: { name: 'c', id: '003' },
    *   no: { name: 'd', id: '004' }
    * };
-   * xo.find(obj, xo.partial(compare, '003')); // {yes: { name: 'a', id: '003' }} 
+   * xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} 
    *
    * @function
    * @name xo.find
