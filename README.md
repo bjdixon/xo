@@ -33,12 +33,12 @@ npm install xo-utils
 ```javascript
 var xo = require('xo-utils');
 
-var partial = require('xo-utils').partial;
+var curry = require('xo-utils').curry;
 ```
 
 ##Contains
 
-* [partial](#partial)
+* [curry](#curry)
 * [filter](#filter)
 * [findIndex](#findIndex)
 * [findKey](#findKey)
@@ -56,93 +56,83 @@ var partial = require('xo-utils').partial;
 
 ##Usage
 
-####partial
+####curry
 
-Takes a callback and zero or more arguments to that callback. Returns a function that can be invoked with remaining arguments at a later time.
+Takes a function and zero or more arguments to that function. Returns a function that can be invoked with remaining arguments at a later time.
 
 ```javascript
-function add(a, b) {
-  return a + b;
-}
+const add = (a, b) => a + b;
 
-var addTen = xo.partial(add, 10);
+const addTen = xo.curry(add, 10);
 
 addTen(32); // => 42
 ```
 
 ####filter
 
-Takes an array and a predicate callback. Returns an array with only those terms that pass the predicate.
+Takes an array and a predicate. Returns an array with only those terms that pass the predicate.
 
 ```javascript
-function compare(id, obj) {
-  return id === obj.id;
-}
-var objArr = [
+const compare = (id, obj) => id === obj.id;
+const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '003' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.filter(objArr, xo.partial(compare, '003')); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
+xo.filter(objArr, xo.curry(compare, '003')); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
 ```
 
 ####findIndex
 
-Takes an array and a predicate callback. Returns the index of the first term that passes the predicate.
+Takes an array and a predicate. Returns the index of the first term that passes the predicate.
 
 ```javascript
-function compare(id, obj) {
-  return id === obj.id;
-}
-var objArr = [
+const compare = (id, obj) => id === obj.id;
+const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '002' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.findIndex(objArr, xo.partial(compare, '003')); // => 2
+xo.findIndex(objArr, xo.curry(compare, '003')); // => 2
 ```
 
 ####findKey
 
-Takes an object and a predicate callback. Returns the key of the first term that passes the predicate.
+Takes an object and a predicate. Returns the key of the first term that passes the predicate.
 
 ```javascript
-function compare(id, obj) {
-  return id === obj.id;
-}
-var obj = {
+const compare = (id, obj) => id === obj.id;
+const obj = {
   hello: { name: 'a', id: '001' },
   goodbye: { name: 'b', id: '002' },
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 } ;
-xo.findKey(obj, xo.partial(compare, '003')); // => 'yes'
+xo.findKey(obj, xo.curry(compare, '003')); // => 'yes'
 ```
 
 ####find
 
-Takes an object or an array  and a predicate callback. Returns the value of the first term that passes the predicate.
+Takes an object or an array  and a predicate. Returns the value of the first term that passes the predicate.
 
 ```javascript
-function compare(id, obj) {
-  return id === obj.id;
-}
-var obj = {
+const compare = (id, obj) => id === obj.id;
+const obj = {
   hello: { name: 'a', id: '001' },
   goodbye: { name: 'b', id: '002' },
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 };
-var objArr = [
+const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '002' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.find(obj, xo.partial(compare, '003')); // => { name: 'c', id: '003' }
-xo.find(objArr, xo.partial(compare, '003')); // => { name: 'c', id: '003' }
+xo.find(obj, xo.curry(compare, '003')); // => { name: 'c', id: '003' }
+xo.find(objArr, xo.curry(compare, '003')); // => { name: 'c', id: '003' }
 ```
 
 ####flatten
@@ -150,7 +140,7 @@ xo.find(objArr, xo.partial(compare, '003')); // => { name: 'c', id: '003' }
 Takes an n-dimensional nested array. Returns a flattened 1-dimension array.
 
 ```javascript
-var test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
 xo.flatten(test); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
@@ -159,7 +149,7 @@ xo.flatten(test); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 Takes an array. Returns an array with all falsy values removed.
 
 ```javascript
-var test = [1, , false, 2, 3, false];
+const test = [1, , false, 2, 3, false];
 xo.compact(test); // => [1, 2, 3]
 ```
 
@@ -168,10 +158,8 @@ xo.compact(test); // => [1, 2, 3]
 Takes a function and returns a functions. Invoking the returned function will return cached results if the same arguments have been provided during previous invocations.
 
 ```javascript
-var upper = function(str) {
-  return str.toUpperCase();
-};
-var memoUpper = xo.memoize(upper);
+const upper = (str) => str.toUpperCase();
+const memoUpper = xo.memoize(upper);
 memoUpper('foo'); // => "FOO"
 memoUpper('foo'); // => "FOO" (cached version)
 ```
@@ -235,11 +223,20 @@ xo.isBoolean('true'); // => false
 Takes a function and returns a function. The returned function will not be invoked if supplied with null or undefined arguments.
 
 ```javascript
-var sum = function(a, b) {
-  return a + b;
-}
-var maybeSum = xo.maybe(sum);
+const sum = (a, b) => a + b;
+const maybeSum = xo.maybe(sum);
 maybeSum(2, 3); // => 5
 maybeSum(null, 3); // doesn't invoke sum
+```
+####compose
+
+Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to compose (in reverse order) passing the the return value of each as an argument to the next function.
+
+```javascript
+const increment = (a) => a + 1;
+const square = (a) => a * a;
+
+const squarePlusOne = xo.compose(increment, square);
+squarePlusOne(3); // => 10
 ```
 
