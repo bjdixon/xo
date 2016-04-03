@@ -30,7 +30,7 @@
     "strict"        : false,    // true: Requires all functions run in ES5 Strict Mode
     "maxparams"     : 5,        // {int} Max number of formal params allowed per function
     "maxdepth"      : 3,        // {int} Max depth of nested blocks (within functions)
-    "maxstatements" : 26,       // {int} Max number statements per function
+    "maxstatements" : 32,       // {int} Max number statements per function
     "maxcomplexity" : 3,        // {int} Max cyclomatic complexity per function
     "maxlen"        : 140,      // {int} Max number of characters per line
     "varstmt"       : true,     // true: Disallow any var statements. Only `let` and `const` are allowed.
