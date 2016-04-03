@@ -589,9 +589,16 @@ describe('xo.compose', function() {
 
   it('invokes the composed functions in reverse order', function() {
     const increment = (a) => a + 1;
-    const square = (a) => a * a;
+    const square = (a) => a + a;
     const squarePlusOne = xo.compose(increment, square);
-    expect(squarePlusOne(3)).toEqual(10);
+    expect(squarePlusOne(3)).toEqual(7);
+  });
+
+  it('is associative', function() {
+    const increment = (a) => a + 1;
+    const square = (a) => a + a;
+    const cube = (a) => a * 3;
+    expect(xo.compose(increment, square, cube)(3)).toEqual(xo.compose(xo.compose(increment, square), cube)(3));
   });
 
 });
