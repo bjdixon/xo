@@ -7,7 +7,7 @@
 
   /**
    * @namespace xo
-   * @version 0.3.2
+   * @version 2.0.0
   */
   xo.VERSION = '2.0.0';
 
