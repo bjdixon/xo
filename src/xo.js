@@ -143,10 +143,10 @@
   xo.curry = function (fn) {
     const initialArgs = Array.prototype.slice.call(arguments, 1);
     return function () {
-      return fn.apply(this, initialArgs.concat(Array.prototype.slice.call(arguments)));
+      const args = initialArgs.concat(Array.prototype.slice.call(arguments));
+      return (args.length < fn.length) ? xo.curry.apply(this, [fn].concat(args)) : fn.apply(this, args);
     };
   };
-
 
   /**
    * Takes an n-dimensional nested array.

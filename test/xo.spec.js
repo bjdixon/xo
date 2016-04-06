@@ -167,6 +167,17 @@ describe('xo.curry', function() {
     expect(hi('hi', 'Bob')).toEqual('hi Bob');
   });
 
+  it('allows arguments to be applied one at a time or all at once', function() {
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.curry(greet);
+    expect(hi('hi', 'Bob')).toEqual(hi('hi')('Bob'));
+  });
+
+  it('allows arguments to be applied one at a time or all at once when there are many arguments', function() {
+    const add5Things = (arg1, arg2, arg3, arg4, arg5) => arg1 + arg2 + arg3 + arg4 + arg5;
+    expect(xo.curry(add5Things)(1, 2, 3, 4, 5)).toEqual(xo.curry(add5Things)(1)(2)(3)(4)(5));
+  });
+
   it('takes a function when initializing an argument and context when invoking', function() {
     function Greet(greeting, name) {
       this.greeting = greeting;
