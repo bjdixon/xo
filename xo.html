@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li><li data-type='method'><a href="xo.html#.partial">partial</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.curry">curry</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -59,7 +59,7 @@
 
     
     <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>0.3.2</li></ul></dd>
+    <dd class="tag-version"><ul class="dummy"><li>2.0.0</li></ul></dd>
     
 
     
@@ -223,7 +223,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line205">line 205</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line204">line 204</a>
     </li></ul></dd>
     
 
@@ -390,7 +390,7 @@ xo.compact(test); // [1, 2, 3]</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line369">line 369</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line368">line 368</a>
     </li></ul></dd>
     
 
@@ -440,6 +440,206 @@ const square = (a) => a * a;
 
 const squarePlusOne = xo.compose(increment, square);
 squarePlusOne(3); // 10</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".curry"><span class="type-signature">(static) </span>curry<span class="signature">(fn, args<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Takes a function with zero or more arguments.<br>Returns a function that can be invoked with remaining arguments at a later time</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Partially apply this function prefilling some arguments</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Initial arguments that the partially applied function will be applied to.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line127">line 127</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ');
+
+const sayHi = xo.curry(greet, 'Hi');
+sayHi('Bob'); // "Hi Bob"</code></pre>
 
 
 
@@ -571,7 +771,7 @@ squarePlusOne(3); // 10</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line171">line 171</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line170">line 170</a>
     </li></ul></dd>
     
 
@@ -625,7 +825,7 @@ const objArr = [
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.filter(objArr, xo.partial(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] </code></pre>
+xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] </code></pre>
 
 
 
@@ -757,7 +957,7 @@ xo.filter(objArr, xo.partial(compare, '003')); // [{ name: 'b', id: '003'},{name
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line286">line 286</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line285">line 285</a>
     </li></ul></dd>
     
 
@@ -815,7 +1015,7 @@ const obj = {
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 };
-xo.find(obj, xo.partial(compare, '003')); // {yes: { name: 'a', id: '003' }} </code></pre>
+xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </code></pre>
 
 
 
@@ -947,7 +1147,7 @@ xo.find(obj, xo.partial(compare, '003')); // {yes: { name: 'a', id: '003' }} </c
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line222">line 222</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
@@ -1001,7 +1201,7 @@ const objArr = [
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.findIndex(objArr, xo.partial(compare, '003')); // 2</code></pre>
+xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
 
 
 
@@ -1133,7 +1333,7 @@ xo.findIndex(objArr, xo.partial(compare, '003')); // 2</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line255">line 255</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line254">line 254</a>
     </li></ul></dd>
     
 
@@ -1187,7 +1387,7 @@ const obj = {
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 };
-xo.findKey(obj, xo.partial(compare, '003')); // yes </code></pre>
+xo.findKey(obj, xo.curry(compare, '003')); // yes </code></pre>
 
 
 
@@ -1296,7 +1496,7 @@ xo.findKey(obj, xo.partial(compare, '003')); // yes </code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line152">line 152</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line151">line 151</a>
     </li></ul></dd>
     
 
@@ -2381,7 +2581,7 @@ xo.isString(true); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line342">line 342</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line341">line 341</a>
     </li></ul></dd>
     
 
@@ -2539,7 +2739,7 @@ maybeSum(null, 3); // doesn't invoke sum</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line317">line 317</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line316">line 316</a>
     </li></ul></dd>
     
 
@@ -2698,206 +2898,6 @@ memoUpper('foo'); // "FOO" (cached version)</code></pre>
 
 
         
-            
-
-    
-
-    <h4 class="name" id=".partial"><span class="type-signature">(static) </span>partial<span class="signature">(fn, args<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {function}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Takes a function with zero or more arguments.<br>Returns a function that can be invoked with remaining arguments at a later time</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fn</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Partially apply this function prefilling some arguments</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>Initial arguments that the partially applied function will be applied to.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line127">line 127</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">function</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ');
-
-const sayHi = xo.partial(greet, 'Hi');
-sayHi('Bob'); // "Hi Bob"</code></pre>
-
-
-
-        
     
 
     
@@ -2915,7 +2915,7 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Apr 03 2016 15:22:23 GMT-0400 (EDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Apr 06 2016 17:49:19 GMT-0400 (EDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
