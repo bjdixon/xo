@@ -39,6 +39,7 @@ var curry = require('xo-utils').curry;
 ##Contains
 
 * [curry](#curry)
+* [compose](#compose)
 * [filter](#filter)
 * [findIndex](#findIndex)
 * [findKey](#findKey)
@@ -66,6 +67,18 @@ const add = (a, b) => a + b;
 const addTen = xo.curry(add, 10);
 
 addTen(32); // => 42
+```
+
+####compose
+
+Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to compose (in reverse order) passing the the return value of each as an argument to the next function.
+
+```javascript
+const increment = (a) => a + 1;
+const square = (a) => a * a;
+
+const squarePlusOne = xo.compose(increment, square);
+squarePlusOne(3); // => 10
 ```
 
 ####filter
@@ -228,15 +241,3 @@ const maybeSum = xo.maybe(sum);
 maybeSum(2, 3); // => 5
 maybeSum(null, 3); // doesn't invoke sum
 ```
-####compose
-
-Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to compose (in reverse order) passing the the return value of each as an argument to the next function.
-
-```javascript
-const increment = (a) => a + 1;
-const square = (a) => a * a;
-
-const squarePlusOne = xo.compose(increment, square);
-squarePlusOne(3); // => 10
-```
-
