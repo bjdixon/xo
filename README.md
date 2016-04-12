@@ -54,6 +54,7 @@ var curry = require('xo-utils').curry;
 * [isNumber](#isNumber)
 * [isBoolean](#isBoolean)
 * [maybe](#maybe)
+* [partial](#partial)
 
 ##Usage
 
@@ -240,4 +241,16 @@ const sum = (a, b) => a + b;
 const maybeSum = xo.maybe(sum);
 maybeSum(2, 3); // => 5
 maybeSum(null, 3); // doesn't invoke sum
+```
+
+####partial
+
+Takes a function and zero or more arguments to that function. Returns a function that can be invoked with remaining arguments at a later time.
+
+```javascript
+const add = (a, b) => a + b;
+
+const addTen = xo.partial(add, 10);
+
+addTen(32); // => 42
 ```
