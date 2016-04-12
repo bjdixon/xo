@@ -4,7 +4,7 @@ const xo = require('..');
 describe('xo.VERSION', function() {
 
   it('returns correct version number', function() {
-    expect(xo.VERSION).toBe('2.0.0');
+    expect(xo.VERSION).toBe('2.1.0');
   });
 
 });
@@ -127,6 +127,57 @@ describe('xo.compact', function() {
     const test = [1, undefined, false, 2, undefined, 3, false, 4, 5];
     const result = [1, 2, 3, 4, 5];
     expect(xo.compact(test)).toEqual(result);
+  });
+
+});
+
+describe('xo.partial', function() {
+
+  it('takes a function when initializing and an argument when invoking', function() {
+    const greet = function(name) {
+      return 'hi ' + name;
+    };
+    const hi = xo.partial(greet);
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function when initializing and an argument when invoking', function() {
+    const greet = (name) => 'hi ' + name;
+    const hi = xo.partial(greet);
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function and an argument when initializing and a final argument when invoking', function() {
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.partial(greet, 'hi');
+    expect(hi('Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a function when initializing and multiple arguments when invoking', function() {
+    const greet = function(greeting, name) {
+      return greeting + ' ' + name;
+    };
+    const hi = xo.partial(greet);
+    expect(hi('hi', 'Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a fat arrow function when initializing and multiple arguments when invoking', function() {
+    const greet = (greeting, name) => greeting + ' ' + name;
+    const hi = xo.partial(greet);
+    expect(hi('hi', 'Bob')).toEqual('hi Bob');
+  });
+
+  it('takes a function when initializing an argument and context when invoking', function() {
+    function Greet(greeting, name) {
+      this.greeting = greeting;
+      this.name = name;
+    }
+    Greet.prototype.speak = function() {
+      return this.greeting + ' ' + this.name;
+    };
+    const Hi = xo.partial(Greet, 'hi');
+    const hiBob = new Hi('Bob');
+    expect(Greet.prototype.speak.call(hiBob)).toEqual('hi Bob');
   });
 
 });

@@ -7,9 +7,9 @@
 
   /**
    * @namespace xo
-   * @version 2.0.0
+   * @version 2.1.0
   */
-  xo.VERSION = '2.0.0';
+  xo.VERSION = '2.1.0';
 
   function identity(x) {
     return x;
@@ -122,6 +122,29 @@
   xo.noConflict = () => {
     root.xo = previous_xo;
     return xo;
+  };
+
+  /**
+   * Takes a function with zero or more arguments.
+   * Returns a function that can be invoked with the remaining arguments at a later time
+   *
+   * @example
+   * const greet = (greeting, name) => [greeting, name].join(' ');
+   *
+   * const sayHi = xo.partial(greet, 'Hi');
+   * sayHi('Bob'); // "Hi Bob"
+   *
+   * @function
+   * @name xo.partial
+   * @param {Function} fn - Partially apply this function prefilling some arguments
+   * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
+   * @return {Function}
+  */
+  xo.partial = function (fn) {
+    const initialArgs = Array.prototype.slice.call(arguments, 1);
+    return function () {
+      return fn.apply(this, initialArgs.concat(Array.prototype.slice.call(arguments)));
+    };
   };
 
   /**
