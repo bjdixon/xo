@@ -25,7 +25,8 @@ squarePlusOne(3); // => 10
 
 var addTen = xo.curry(add, 10);
 
-addTen(32); // => 42</code></pre>
+addTen(32); // => 42
+xo.curry(add)(10, 32) === xo.curry(add)(10)(32); // => true</code></pre>
 <h4>filter</h4>
 <p>Takes an array and a predicate. Returns an array with only those terms that pass the predicate.</p>
 <pre class="prettyprint source lang-javascript"><code>const compare = (id, obj) => id === obj.id;
@@ -60,6 +61,13 @@ xo.compact(test); // => [1, 2, 3]</code></pre>
 var memoUpper = xo.memoize(upper);
 memoUpper('foo'); // => &quot;FOO&quot;
 memoUpper('foo'); // => &quot;FOO&quot; (cached version)</code></pre>
+<h4>partial</h4>
+<p>Takes a function and zero or more arguments to that function. Returns a function that can be invoked with remaining arguments at a later time.</p>
+<pre class="prettyprint source lang-javascript"><code>const add = (a, b) => a + b;
+
+var addTen = xo.partial(add, 10);
+
+addTen(32); // => 42</code></pre>
 <h4>isArray</h4>
 <p>Type check for Array.</p>
 <pre class="prettyprint source lang-javascript"><code>xo.isArray([1, 2, 3]); // => true
