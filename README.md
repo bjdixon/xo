@@ -40,6 +40,7 @@ var curry = require('xo-utils').curry;
 
 * [curry](#curry)
 * [compose](#compose)
+* [pipe](#pipe)
 * [filter](#filter)
 * [findIndex](#findIndex)
 * [findKey](#findKey)
@@ -80,6 +81,18 @@ const square = (a) => a * a;
 
 const squarePlusOne = xo.compose(increment, square);
 squarePlusOne(3); // => 10
+```
+
+####pipe
+
+Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to pipe (in the order supplied) passing the the return value of each as an argument to the next function.
+
+```javascript
+const increment = (a) => a + 1;
+const square = (a) => a * a;
+
+const plusOneSquare = xo.pipe(increment, square);
+plusOneSquare(3); // => 16
 ```
 
 ####filter

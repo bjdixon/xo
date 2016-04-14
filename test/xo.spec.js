@@ -4,7 +4,7 @@ const xo = require('..');
 describe('xo.VERSION', function() {
 
   it('returns correct version number', function() {
-    expect(xo.VERSION).toBe('2.1.0');
+    expect(xo.VERSION).toBe('2.2.0');
   });
 
 });
@@ -610,6 +610,24 @@ describe('xo.compose', function() {
     const square = (a) => a * a;
     const cube = (a) => a * a * a;
     expect(xo.compose(increment, square, cube)(3)).toEqual(xo.compose(xo.compose(increment, square), cube)(3));
+  });
+
+});
+
+describe('xo.pipe', function() {
+
+  it('invokes the piped functions in order', function() {
+    const increment = (a) => a + 1;
+    const square = (a) => a * a;
+    const plusOneSquare = xo.pipe(increment, square);
+    expect(plusOneSquare(3)).toEqual(16);
+  });
+
+  it('is associative', function() {
+    const increment = (a) => a + 1;
+    const square = (a) => a * a;
+    const cube = (a) => a * a * a;
+    expect(xo.pipe(increment, square, cube)(3)).toEqual(xo.pipe(xo.pipe(increment, square), cube)(3));
   });
 
 });

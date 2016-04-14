@@ -7,9 +7,9 @@
 
   /**
    * @namespace xo
-   * @version 2.1.0
+   * @version 2.2.0
   */
-  xo.VERSION = '2.1.0';
+  xo.VERSION = '2.2.0';
 
   function identity(x) {
     return x;
@@ -392,7 +392,9 @@
    * Takes functions and returns a function.
    * The returned function when invoked will invoke each function
    * that was supplied as an argument to compose passing the result of
-   * each invocation as the argument to the next function
+   * each invocation as the argument to the next function. The functions
+   * supplied as arguments are invoked in reverse order, with the last
+   * argument being called first
    *
    * @example
    * const increment = (a) => a + 1;
@@ -412,6 +414,35 @@
       let args = arguments;
       while (funcs.length) {
         args = [funcs.pop().apply(this, args)];
+      }
+      return args[0];
+    };
+  };
+
+  /**
+   * Takes functions and returns a function.
+   * The returned function when invoked will invoke each function
+   * that was supplied as an argument to compose passing the result of
+   * each invocation as the argument to the next function
+   *
+   * @example
+   * const increment = (a) => a + 1;
+   * const square = (a) => a * a;
+   *
+   * const plusOneSquare = xo.pipe(increment, square);
+   * plusOneSquare(3); // 16
+   *
+   * @function
+   * @name xo.pipe
+   * @param {Function} [fns] - The functions to be composed
+   * @return {Function}
+  */
+  xo.pipe = function () {
+    let funcs = Array.prototype.slice.call(arguments);
+    return function () {
+      let args = arguments;
+      while (funcs.length) {
+        args = [funcs.shift().apply(this, args)];
       }
       return args[0];
     };
