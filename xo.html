@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.curry">curry</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li><li data-type='method'><a href="xo.html#.partial">partial</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.curry">curry</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li><li data-type='method'><a href="xo.html#.partial">partial</a></li><li data-type='method'><a href="xo.html#.pipe">pipe</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -59,7 +59,7 @@
 
     
     <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>2.1.0</li></ul></dd>
+    <dd class="tag-version"><ul class="dummy"><li>2.2.0</li></ul></dd>
     
 
     
@@ -285,7 +285,7 @@ xo.compact(test); // [1, 2, 3]</code></pre>
 
 
 <div class="description">
-    <p>Takes functions and returns a function.<br>The returned function when invoked will invoke each function<br>that was supplied as an argument to compose passing the result of<br>each invocation as the argument to the next function</p>
+    <p>Takes functions and returns a function.<br>The returned function when invoked will invoke each function<br>that was supplied as an argument to compose passing the result of<br>each invocation as the argument to the next function. The functions<br>supplied as arguments are invoked in reverse order, with the last<br>argument being called first</p>
 </div>
 
 
@@ -3098,6 +3098,176 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 
 
         
+            
+
+    
+
+    <h4 class="name" id=".pipe"><span class="type-signature">(static) </span>pipe<span class="signature">(fns<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Takes functions and returns a function.<br>The returned function when invoked will invoke each function<br>that was supplied as an argument to compose passing the result of<br>each invocation as the argument to the next function</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fns</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The functions to be composed</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line422">line 422</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const increment = (a) => a + 1;
+const square = (a) => a * a;
+
+const plusOneSquare = xo.pipe(increment, square);
+plusOneSquare(3); // 16</code></pre>
+
+
+
+        
     
 
     
@@ -3115,7 +3285,7 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Apr 13 2016 09:26:22 GMT-0400 (EDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Apr 14 2016 03:02:10 GMT-0400 (EDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -11,13 +11,22 @@
 <pre class="prettyprint source lang-sh"><code>npm install xo-utils</code></pre><pre class="prettyprint source lang-javascript"><code>const xo = require('xo-utils');</code></pre>
 <h2>Usage</h2>
 <h4>compose</h4>
-<p>Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to compose returning the result of each invocation as the argument to the next function.</p>
+<p>Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to compose (in reverse order) returning the result of each invocation as the argument to the next function.</p>
 <pre class="prettyprint source lang-javascript"><code>const increment = (a) => a + 1;
 const square = (a) => a * a;
 
 const squarePlusOne = xo.compose(increment, square);
 
 squarePlusOne(3); // => 10
+</code></pre>
+<h4>pipe</h4>
+<p>Takes functions and returns a function. The returned function when invoked will invoke each function that was supplied as an argument to pipe returning the result of each invocation as the argument to the next function.</p>
+<pre class="prettyprint source lang-javascript"><code>const increment = (a) => a + 1;
+const square = (a) => a * a;
+
+const plusOneSquare = xo.pipe(increment, square);
+
+plusOneSquare(3); // => 16
 </code></pre>
 <h4>curry</h4>
 <p>Takes a function and zero or more arguments to that function. Returns a function that can be invoked with remaining arguments at a later time.</p>
