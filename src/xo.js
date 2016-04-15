@@ -449,8 +449,8 @@
   };
 
   /**
-   * Takes an array and a callback. returns an array.
-   * Returns an array that is the result of having the callback applied
+   * Takes an array and a function.
+   * Returns an array that is the result of having the function applied
    * to each term of the supplied array.
    *
    * @example
@@ -471,6 +471,34 @@
       len;
     for (idx = 0, len = collection.length; idx < len; idx += 1) {
       output.push(callback(collection[idx]));
+    }
+    return output;
+  };
+
+  /**
+   * Takes an array, an initial value and a function.
+   * Returns a single value that is the result of having the function applied
+   * to each term of the supplied array.
+   *
+   * @example
+   * const arr = [1, 2, 3, 4];
+   * const sum = (a, b) => a + b;
+   *
+   * const out = xo.reduce(sum, arr); // => 10;
+   *
+   * @function
+   * @name xo.reduce
+   * @param {Function} callback - The function to be applied to each term of the supplied array
+   * @param {*} initialValue - The value to use as the first argument to the first call of the callback 
+   * @param {Array} collection - The array that we're operating on
+   * @return {*}
+   */
+  xo.reduce = (callback, initialValue, collection) => {
+    let output = initialValue,
+      idx,
+      len;
+    for (idx = 0, len = collection.length; idx < len; idx += 1) {
+      output = callback(output, collection[idx]);
     }
     return output;
   };

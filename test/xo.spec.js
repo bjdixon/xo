@@ -654,3 +654,13 @@ describe('xo.map', function() {
 
 });
 
+describe('xo.reduce', function() {
+
+  it('returns the correct value after being operated on', function() {
+    const arr = [1, 2, 3, 4, 5];
+    const sum = (a, b) => a + b;
+    expect(xo.reduce(sum, 0, arr)).toEqual(15);
+  });
+
+});
+
