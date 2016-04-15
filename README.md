@@ -267,3 +267,25 @@ const addTen = xo.partial(add, 10);
 
 addTen(32); // => 42
 ```
+
+####map
+
+Takes an array and a function. Returns an array that is the result of applying the function to each term of the original array.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const square = (a) => a * a;
+
+const out = xo.map(square, arr); // => [1, 4, 9, 16];
+```
+
+####reduce
+
+Takes an array, an initial value and a function. Returns a single value that is the result of applying the function to each term of the array and an accumulator.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const sum = (a, b) => a + b;
+
+const out = xo.reduce(sum, 0, arr); // => 10;
+```

@@ -484,7 +484,7 @@
    * const arr = [1, 2, 3, 4];
    * const sum = (a, b) => a + b;
    *
-   * const out = xo.reduce(sum, arr); // => 10;
+   * const out = xo.reduce(sum, 0, arr); // => 10;
    *
    * @function
    * @name xo.reduce
