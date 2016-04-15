@@ -7,9 +7,9 @@
 
   /**
    * @namespace xo
-   * @version 2.2.0
+   * @version 2.3.0
   */
-  xo.VERSION = '2.2.0';
+  xo.VERSION = '2.3.0';
 
   function identity(x) {
     return x;
@@ -323,7 +323,7 @@
    *
    * @function
    * @name xo.find
-   * @param {Object} {Array} collection - The object or array  containing the elements to test
+   * @param {Object} {Array} collection - The object or array containing the elements to test
    * @param {Function} predicate - The function against which each property of the collection will be tested
    * @return {String} {Number}
   */
@@ -446,6 +446,33 @@
       }
       return args[0];
     };
+  };
+
+  /**
+   * Takes an array and a callback. returns an array.
+   * Returns an array that is the result of having the callback applied
+   * to each term of the supplied array.
+   *
+   * @example
+   * const arr = [1, 2, 3, 4];
+   * const square = (a) => a * a;
+   *
+   * const out = xo.map(square, arr); // => [1, 4, 9, 16];
+   *
+   * @function
+   * @name xo.map
+   * @param {Function} callback - The function to be applied to each term of the supplied array
+   * @param {Array} collection - The array that we're operating on
+   * @return {Array}
+   */
+  xo.map = (callback, collection) => {
+    let output = [],
+      idx,
+      len;
+    for (idx = 0, len = collection.length; idx < len; idx += 1) {
+      output.push(callback(collection[idx]));
+    }
+    return output;
   };
 
   if (typeof exports !== 'undefined') {

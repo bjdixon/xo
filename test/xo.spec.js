@@ -4,7 +4,7 @@ const xo = require('..');
 describe('xo.VERSION', function() {
 
   it('returns correct version number', function() {
-    expect(xo.VERSION).toBe('2.2.0');
+    expect(xo.VERSION).toBe('2.3.0');
   });
 
 });
@@ -628,6 +628,28 @@ describe('xo.pipe', function() {
     const square = (a) => a * a;
     const cube = (a) => a * a * a;
     expect(xo.pipe(increment, square, cube)(3)).toEqual(xo.pipe(xo.pipe(increment, square), cube)(3));
+  });
+
+});
+
+describe('xo.map', function() {
+
+  it('returns an array that is the same length as the array being operated on', function() {
+    const arr = [1, 2, 3, 4, 5];
+    const square = (a) => a * a;
+    const output = xo.map(square, arr);
+    expect(output.length).toEqual(arr.length);
+  });
+
+  it('returns an array that contains the correct values after being operated on', function() {
+    const arr = [1, 2, 3, 4, 5];
+    const square = (a) => a * a;
+    const output = xo.map(square, arr);
+    expect(output[0]).toEqual(1);
+    expect(output[1]).toEqual(4);
+    expect(output[2]).toEqual(9);
+    expect(output[3]).toEqual(16);
+    expect(output[4]).toEqual(25);
   });
 
 });
