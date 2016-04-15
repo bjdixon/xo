@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.curry">curry</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li><li data-type='method'><a href="xo.html#.partial">partial</a></li><li data-type='method'><a href="xo.html#.pipe">pipe</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="xo.html">xo</a><ul class='methods'><li data-type='method'><a href="xo.html#.compact">compact</a></li><li data-type='method'><a href="xo.html#.compose">compose</a></li><li data-type='method'><a href="xo.html#.curry">curry</a></li><li data-type='method'><a href="xo.html#.filter">filter</a></li><li data-type='method'><a href="xo.html#.find">find</a></li><li data-type='method'><a href="xo.html#.findIndex">findIndex</a></li><li data-type='method'><a href="xo.html#.findKey">findKey</a></li><li data-type='method'><a href="xo.html#.flatten">flatten</a></li><li data-type='method'><a href="xo.html#.isArray">isArray</a></li><li data-type='method'><a href="xo.html#.isBoolean">isBoolean</a></li><li data-type='method'><a href="xo.html#.isFunction">isFunction</a></li><li data-type='method'><a href="xo.html#.isNumber">isNumber</a></li><li data-type='method'><a href="xo.html#.isObject">isObject</a></li><li data-type='method'><a href="xo.html#.isString">isString</a></li><li data-type='method'><a href="xo.html#.map">map</a></li><li data-type='method'><a href="xo.html#.maybe">maybe</a></li><li data-type='method'><a href="xo.html#.memoize">memoize</a></li><li data-type='method'><a href="xo.html#.noConflict">noConflict</a></li><li data-type='method'><a href="xo.html#.partial">partial</a></li><li data-type='method'><a href="xo.html#.pipe">pipe</a></li><li data-type='method'><a href="xo.html#.reduce">reduce</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -47,9 +47,9 @@
 
   /**
    * @namespace xo
-   * @version 2.2.0
+   * @version 2.3.0
   */
-  xo.VERSION = '2.2.0';
+  xo.VERSION = '2.3.0';
 
   function identity(x) {
     return x;
@@ -363,7 +363,7 @@
    *
    * @function
    * @name xo.find
-   * @param {Object} {Array} collection - The object or array  containing the elements to test
+   * @param {Object} {Array} collection - The object or array containing the elements to test
    * @param {Function} predicate - The function against which each property of the collection will be tested
    * @return {String} {Number}
   */
@@ -488,6 +488,61 @@
     };
   };
 
+  /**
+   * Takes an array and a function.
+   * Returns an array that is the result of having the function applied
+   * to each term of the supplied array.
+   *
+   * @example
+   * const arr = [1, 2, 3, 4];
+   * const square = (a) => a * a;
+   *
+   * const out = xo.map(square, arr); // => [1, 4, 9, 16];
+   *
+   * @function
+   * @name xo.map
+   * @param {Function} callback - The function to be applied to each term of the supplied array
+   * @param {Array} collection - The array that we're operating on
+   * @return {Array}
+   */
+  xo.map = (callback, collection) => {
+    let output = [],
+      idx,
+      len;
+    for (idx = 0, len = collection.length; idx &lt; len; idx += 1) {
+      output.push(callback(collection[idx]));
+    }
+    return output;
+  };
+
+  /**
+   * Takes an array, an initial value and a function.
+   * Returns a single value that is the result of having the function applied
+   * to each term of the supplied array.
+   *
+   * @example
+   * const arr = [1, 2, 3, 4];
+   * const sum = (a, b) => a + b;
+   *
+   * const out = xo.reduce(sum, 0, arr); // => 10;
+   *
+   * @function
+   * @name xo.reduce
+   * @param {Function} callback - The function to be applied to each term of the supplied array
+   * @param {*} initialValue - The value to use as the first argument to the first call of the callback 
+   * @param {Array} collection - The array that we're operating on
+   * @return {*}
+   */
+  xo.reduce = (callback, initialValue, collection) => {
+    let output = initialValue,
+      idx,
+      len;
+    for (idx = 0, len = collection.length; idx &lt; len; idx += 1) {
+      output = callback(output, collection[idx]);
+    }
+    return output;
+  };
+
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' &amp;&amp; module.exports) {
       exports = module.exports = xo; // jshint ignore:line
@@ -510,7 +565,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Apr 14 2016 03:16:03 GMT-0400 (EDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Apr 15 2016 03:03:36 GMT-0400 (EDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
