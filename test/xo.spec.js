@@ -424,7 +424,7 @@ describe('xo.filter', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.filter(objArr, xo.curry(compare, '003')).length).toEqual(2);
+    expect(xo.filter(xo.curry(compare, '003'), objArr).length).toEqual(2);
   });
 
   it('returns empty array when no match is made', function() {
@@ -437,7 +437,7 @@ describe('xo.filter', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.filter(objArr, xo.curry(compare, '005'))).toEqual([]);
+    expect(xo.filter(xo.curry(compare, '005'), objArr)).toEqual([]);
   });
 
 });

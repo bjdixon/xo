@@ -204,15 +204,15 @@
    *   { name: 'c', id: '003' },
    *   { name: 'd', id: '004' }
    * ];
-   * xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
+   * xo.filter(xo.curry(compare, '003'), objArr); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
    *
    * @function
    * @name xo.filter
-   * @param {Array} arr - The array containing the elements to test
    * @param {Function} predicate - The function against which each element of the array will be tested
+   * @param {Array} arr - The array containing the elements to test
    * @return {Array}
   */
-  xo.filter = (arr, predicate) => {
+  xo.filter = (predicate, arr) => {
     let result = [],
       idx,
       len;
@@ -238,7 +238,7 @@
    * @return {Array}
   */
   xo.compact = (arr) => {
-    return xo.filter(arr, identity);
+    return xo.filter(identity, arr);
   };
 
   /**
