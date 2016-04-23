@@ -256,7 +256,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.findIndex(objArr, xo.curry(compare, '003'))).toEqual(2);
+    expect(xo.findIndex(xo.curry(compare, '003'), objArr)).toEqual(2);
   });
 
   it('returns -1 when no match is made', function() {
@@ -269,7 +269,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.findIndex(objArr, xo.curry(compare, '005'))).toEqual(-1);
+    expect(xo.findIndex(xo.curry(compare, '005'), objArr)).toEqual(-1);
   });
 
   it('returns index of first occurence when multiple matches can be made', function() {
@@ -282,7 +282,7 @@ describe('xo.findIndex', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '003' }
     ];
-    expect(xo.findIndex(objArr, xo.curry(compare, '003'))).toEqual(1);
+    expect(xo.findIndex(xo.curry(compare, '003'), objArr)).toEqual(1);
   });
 
 });

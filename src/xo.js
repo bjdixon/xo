@@ -255,15 +255,15 @@
    *   { name: 'c', id: '003' },
    *   { name: 'd', id: '004' }
    * ];
-   * xo.findIndex(objArr, xo.curry(compare, '003')); // 2
+   * xo.findIndex(xo.curry(compare, '003'), objArr); // 2
    *
    * @function
    * @name xo.findIndex
-   * @param {Array} arr - The array containing the elements to test
    * @param {Function} predicate - The function against which each element of the array will be tested
+   * @param {Array} arr - The array containing the elements to test
    * @return {Number}
   */
-  xo.findIndex = (arr, predicate) => {
+  xo.findIndex = (predicate, arr) => {
     let idx,
       len;
     for (idx = 0, len = arr.length; idx < len; idx += 1) {
@@ -329,7 +329,7 @@
   */
   xo.find = (collection, predicate) => {
     if (xo.isArray(collection)) {
-      return collection[xo.findIndex(collection, predicate)];
+      return collection[xo.findIndex(predicate, collection)];
     }
     if (xo.isObject(collection)) {
       return collection[xo.findKey(collection, predicate)];
