@@ -299,7 +299,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.curry(compare, '003'))).toEqual('yes');
+    expect(xo.findKey(xo.curry(compare, '003'), obj)).toEqual('yes');
   });
 
   it('returns null when no match is made', function() {
@@ -312,7 +312,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.curry(compare, '005'))).toEqual(null);
+    expect(xo.findKey(xo.curry(compare, '005'), obj)).toEqual(null);
   });
 
   it('returns key of first occurence when multiple matches can be made', function() {
@@ -325,7 +325,7 @@ describe('xo.findKey', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.findKey(obj, xo.curry(compare, '003'))).toEqual('goodbye');
+    expect(xo.findKey(xo.curry(compare, '003'), obj)).toEqual('goodbye');
   });
 
 });

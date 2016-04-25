@@ -288,15 +288,15 @@
    *   yes: { name: 'c', id: '003' },
    *   no: { name: 'd', id: '004' }
    * };
-   * xo.findKey(obj, xo.curry(compare, '003')); // yes 
+   * xo.findKey(xo.curry(compare, '003'), obj); // yes 
    *
    * @function
    * @name xo.findKey
-   * @param {Object} obj - The object containing the elements to test
    * @param {Function} predicate - The function against which each property of the object will be tested
+   * @param {Object} obj - The object containing the elements to test
    * @return {String}
   */
-  xo.findKey = (obj, predicate) => {
+  xo.findKey = (predicate, obj) => {
     for (let prop in obj) {
       if (obj.hasOwnProperty(prop) && predicate(obj[prop])) {
         return prop;
@@ -332,7 +332,7 @@
       return collection[xo.findIndex(predicate, collection)];
     }
     if (xo.isObject(collection)) {
-      return collection[xo.findKey(collection, predicate)];
+      return collection[xo.findKey(predicate, collection)];
     }
   };
 
