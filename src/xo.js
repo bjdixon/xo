@@ -319,15 +319,15 @@
    *   yes: { name: 'c', id: '003' },
    *   no: { name: 'd', id: '004' }
    * };
-   * xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} 
+   * xo.find(xo.curry(compare, '003'), obj); // {yes: { name: 'a', id: '003' }} 
    *
    * @function
    * @name xo.find
-   * @param {Object} {Array} collection - The object or array containing the elements to test
    * @param {Function} predicate - The function against which each property of the collection will be tested
+   * @param {Object} {Array} collection - The object or array containing the elements to test
    * @return {String} {Number}
   */
-  xo.find = (collection, predicate) => {
+  xo.find = (predicate, collection) => {
     if (xo.isArray(collection)) {
       return collection[xo.findIndex(predicate, collection)];
     }

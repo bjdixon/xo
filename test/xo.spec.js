@@ -342,7 +342,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.curry(compare, '003'))).toEqual({ name: 'c', id: '003' });
+    expect(xo.find(xo.curry(compare, '003'), obj)).toEqual({ name: 'c', id: '003' });
   });
 
   it('returns null when no match is made', function() {
@@ -355,7 +355,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.curry(compare, '005'))).toEqual(null);
+    expect(xo.find(xo.curry(compare, '005'), obj)).toEqual(null);
   });
 
   it('returns value of first occurence when multiple matches can be made', function() {
@@ -368,7 +368,7 @@ describe('xo.find', function() {
       yes: { name: 'c', id: '003' },
       no: { name: 'd', id: '004' }
     };
-    expect(xo.find(obj, xo.curry(compare, '003'))).toEqual({ name: 'b', id: '003' });
+    expect(xo.find(xo.curry(compare, '003'), obj)).toEqual({ name: 'b', id: '003' });
   });
 
   it('returns correct value of array where value is found', function() {
@@ -381,7 +381,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.curry(compare, '003'))).toEqual({ name: 'c', id: '003' });
+    expect(xo.find(xo.curry(compare, '003'), objArr)).toEqual({ name: 'c', id: '003' });
   });
 
   it('returns null when no match is made', function() {
@@ -394,7 +394,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.curry(compare, '005'))).toEqual(null);
+    expect(xo.find(xo.curry(compare, '005'), objArr)).toEqual(null);
   });
 
   it('returns value of first occurence when multiple matches can be made', function() {
@@ -407,7 +407,7 @@ describe('xo.find', function() {
       { name: 'c', id: '003' },
       { name: 'd', id: '004' }
     ];
-    expect(xo.find(objArr, xo.curry(compare, '003'))).toEqual({ name: 'b', id: '003' });
+    expect(xo.find(xo.curry(compare, '003'), objArr)).toEqual({ name: 'b', id: '003' });
   });
 
 });
