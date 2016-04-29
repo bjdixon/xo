@@ -4,7 +4,7 @@ const xo = require('..');
 describe('xo.VERSION', () => {
 
   it('returns correct version number', () => {
-    expect(xo.VERSION).toBe('2.3.0');
+    expect(xo.VERSION).toBe('3.0.0');
   });
 
 });

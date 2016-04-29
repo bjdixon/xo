@@ -9,7 +9,7 @@
    * @namespace xo
    * @version 2.3.0
   */
-  xo.VERSION = '2.3.0'
+  xo.VERSION = '3.0.0'
 
   const identity = x => x
 
