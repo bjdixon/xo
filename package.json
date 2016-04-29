@@ -6,7 +6,7 @@
   "author": "bjdixon",
   "dependencies": {},
   "engines": {
-    "node": "4.2.4"
+    "node": ">=6.0.0"
   },
   "directories": {
     "test": "tests"
