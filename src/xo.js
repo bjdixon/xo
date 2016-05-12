@@ -138,10 +138,9 @@
    * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
    * @return {Function}
   */
-  xo.partial = function (fn) {
-    const initialArgs = Array.prototype.slice.call(arguments, 1)
-    return function () {
-      return fn.apply(this, initialArgs.concat(Array.prototype.slice.call(arguments)))
+  xo.partial = function (fn, ...initialArgs) {
+    return function (...args) {
+      return fn.apply(this, initialArgs.concat(args))
     }
   }
 
@@ -161,71 +160,10 @@
    * @param {*} [args] - Initial arguments that the partially applied function will be applied to.
    * @return {Function}
   */
-  xo.curry = function (fn) {
-    const initialArgs = Array.prototype.slice.call(arguments, 1)
-    return function () {
-      const args = initialArgs.concat(Array.prototype.slice.call(arguments))
+  xo.curry = function (fn, ...initialArgs) {
+    return function (...suppliedArgs) {
+      const args = initialArgs.concat(suppliedArgs)
       return (args.length < fn.length) ? xo.curry.apply(this, [fn].concat(args)) : fn.apply(this, args)
-    }
-  }
-
-  /**
-   * Takes functions and returns a function.
-   * The returned function when invoked will invoke each function
-   * that was supplied as an argument to compose passing the result of
-   * each invocation as the argument to the next function. The functions
-   * supplied as arguments are invoked in reverse order, with the last
-   * argument being called first
-   *
-   * @example
-   * const increment = a => a + 1
-   * const square = a => a * a
-   *
-   * const squarePlusOne = xo.compose(increment, square)
-   * squarePlusOne(3) // 10
-   *
-   * @function
-   * @name xo.compose
-   * @param {Function} [fns] - The functions to be composed
-   * @return {Function}
-  */
-  xo.compose = function () {
-    let funcs = Array.prototype.slice.call(arguments)
-    return function () {
-      let args = arguments
-      while (funcs.length) {
-        args = [funcs.pop().apply(this, args)]
-      }
-      return args[0]
-    }
-  }
-
-  /**
-   * Takes functions and returns a function.
-   * The returned function when invoked will invoke each function
-   * that was supplied as an argument to compose passing the result of
-   * each invocation as the argument to the next function
-   *
-   * @example
-   * const increment = a => a + 1
-   * const square = a => a * a
-   *
-   * const plusOneSquare = xo.pipe(increment, square)
-   * plusOneSquare(3) // 16
-   *
-   * @function
-   * @name xo.pipe
-   * @param {Function} [fns] - The functions to be composed
-   * @return {Function}
-  */
-  xo.pipe = function () {
-    let funcs = Array.prototype.slice.call(arguments)
-    return function () {
-      let args = arguments
-      while (funcs.length) {
-        args = [funcs.shift().apply(this, args)]
-      }
-      return args[0]
     }
   }
 
@@ -283,6 +221,52 @@
     }
     return output
   }
+
+  const combine = fns => arg => xo.reduce((a, fn) => fn(a), arg, fns)
+
+  /**
+   * Takes functions and returns a function.
+   * The returned function when invoked will invoke each function
+   * that was supplied as an argument to compose passing the result of
+   * each invocation as the argument to the next function. The functions
+   * supplied as arguments are invoked in reverse order, with the last
+   * argument being called first
+   *
+   * @example
+   * const increment = a => a + 1
+   * const square = a => a * a
+   *
+   * const squarePlusOne = xo.compose(increment, square)
+   * squarePlusOne(3) // 10
+   *
+   * @function
+   * @name xo.compose
+   * @param {Function} [fns] - The functions to be composed
+   * @return {Function}
+  */
+  xo.compose = (...fns) => combine(fns.reverse())
+  
+
+  /**
+   * Takes functions and returns a function.
+   * The returned function when invoked will invoke each function
+   * that was supplied as an argument to compose passing the result of
+   * each invocation as the argument to the next function
+   *
+   * @example
+   * const increment = a => a + 1
+   * const square = a => a * a
+   *
+   * const plusOneSquare = xo.pipe(increment, square)
+   * plusOneSquare(3) // 16
+   *
+   * @function
+   * @name xo.pipe
+   * @param {Function} [fns] - The functions to be composed
+   * @return {Function}
+  */
+  xo.pipe = (...fns) => combine(fns)
+
 
   /**
    * Takes an n-dimensional nested array.
@@ -492,8 +476,7 @@
    * @return {Function}
   */
   xo.maybe = fn => {
-    return function () {
-      const args = Array.prototype.slice.call(arguments)
+    return function (...args) {
       if (!args.length || args.some(val => val == null)) {
         return
       }
