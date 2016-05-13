@@ -97,7 +97,7 @@ plusOneSquare(3); // => 16
 
 ####filter
 
-Takes an array and a predicate. Returns an array with only those terms that pass the predicate.
+Takes a predicate and an array. Returns an array with only those terms that pass the predicate.
 
 ```javascript
 const compare = (id, obj) => id === obj.id;
@@ -107,12 +107,12 @@ const objArr = [
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.filter(objArr, xo.curry(compare, '003')); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
+xo.filter(xo.curry(compare, '003'), objArr); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}] 
 ```
 
 ####findIndex
 
-Takes an array and a predicate. Returns the index of the first term that passes the predicate.
+Takes a predicate and an array. Returns the index of the first term that passes the predicate.
 
 ```javascript
 const compare = (id, obj) => id === obj.id;
@@ -122,12 +122,12 @@ const objArr = [
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.findIndex(objArr, xo.curry(compare, '003')); // => 2
+xo.findIndex(xo.curry(compare, '003'), objArr); // => 2
 ```
 
 ####findKey
 
-Takes an object and a predicate. Returns the key of the first term that passes the predicate.
+Takes a predicate and an object. Returns the key of the first term that passes the predicate.
 
 ```javascript
 const compare = (id, obj) => id === obj.id;
@@ -137,12 +137,12 @@ const obj = {
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
 } ;
-xo.findKey(obj, xo.curry(compare, '003')); // => 'yes'
+xo.findKey(xo.curry(compare, '003'), obj); // => 'yes'
 ```
 
 ####find
 
-Takes an object or an array  and a predicate. Returns the value of the first term that passes the predicate.
+Takes a predicate and an object or an array. Returns the value of the first term that passes the predicate.
 
 ```javascript
 const compare = (id, obj) => id === obj.id;
@@ -158,8 +158,8 @@ const objArr = [
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.find(obj, xo.curry(compare, '003')); // => { name: 'c', id: '003' }
-xo.find(objArr, xo.curry(compare, '003')); // => { name: 'c', id: '003' }
+xo.find(xo.curry(compare, '003'), obj); // => { name: 'c', id: '003' }
+xo.find(xo.curry(compare, '003'), objArr); // => { name: 'c', id: '003' }
 ```
 
 ####flatten
@@ -270,7 +270,7 @@ addTen(32); // => 42
 
 ####map
 
-Takes an array and a function. Returns an array that is the result of applying the function to each term of the original array.
+Takes a function and an array. Returns an array that is the result of applying the function to each term of the original array.
 
 ```javascript
 const arr = [1, 2, 3, 4];
@@ -281,7 +281,7 @@ const out = xo.map(square, arr); // => [1, 4, 9, 16];
 
 ####reduce
 
-Takes an array, an initial value and a function. Returns a single value that is the result of applying the function to each term of the array and an accumulator.
+Takes a function, an initial value and an array. Returns a single value that is the result of applying the function to each term of the array and an accumulator.
 
 ```javascript
 const arr = [1, 2, 3, 4];

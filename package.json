@@ -19,7 +19,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-jsdoc": "^1.0.0",
+    "grunt-jsdoc": "^2.0.0",
     "grunt-template-jasmine-istanbul": "^0.4.0",
     "istanbul": "^0.4.0",
     "jasmine-node": "^1.14.5",
