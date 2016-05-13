@@ -223,7 +223,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line227">line 227</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line302">line 302</a>
     </li></ul></dd>
     
 
@@ -268,8 +268,8 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const test = [1, , false, 2, 3, false];
-xo.compact(test); // [1, 2, 3]</code></pre>
+    <pre class="prettyprint"><code>const test = [1, , false, 2, 3, false]
+xo.compact(test) // [1, 2, 3]</code></pre>
 
 
 
@@ -390,7 +390,7 @@ xo.compact(test); // [1, 2, 3]</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line391">line 391</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line211">line 211</a>
     </li></ul></dd>
     
 
@@ -435,11 +435,11 @@ xo.compact(test); // [1, 2, 3]</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const increment = (a) => a + 1;
-const square = (a) => a * a;
+    <pre class="prettyprint"><code>const increment = a => a + 1
+const square = a => a * a
 
-const squarePlusOne = xo.compose(increment, square);
-squarePlusOne(3); // 10</code></pre>
+const squarePlusOne = xo.compose(increment, square)
+squarePlusOne(3) // 10</code></pre>
 
 
 
@@ -591,7 +591,7 @@ squarePlusOne(3); // 10</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line150">line 150</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line147">line 147</a>
     </li></ul></dd>
     
 
@@ -636,10 +636,10 @@ squarePlusOne(3); // 10</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ');
+    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ')
 
-const sayHi = xo.curry(greet, 'Hi');
-sayHi('Bob'); // "Hi Bob"</code></pre>
+const sayHi = xo.curry(greet, 'Hi')
+sayHi('Bob') // "Hi Bob"</code></pre>
 
 
 
@@ -648,7 +648,7 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 
     
 
-    <h4 class="name" id=".filter"><span class="type-signature">(static) </span>filter<span class="signature">(arr, predicate)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id=".filter"><span class="type-signature">(static) </span>filter<span class="signature">(predicate, arr)</span><span class="type-signature"> &rarr; {Array}</span></h4>
 
     
 
@@ -691,29 +691,6 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 
         <tr>
             
-                <td class="name"><code>arr</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The array containing the elements to test</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>predicate</code></td>
             
 
@@ -731,6 +708,29 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
             
 
             <td class="description last"><p>The function against which each element of the array will be tested</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The array containing the elements to test</p></td>
         </tr>
 
     
@@ -771,7 +771,7 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line193">line 193</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
@@ -817,15 +817,15 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>function compare(id, obj) {
-  return id === obj.id;
+  return id === obj.id
 }
 const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '003' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
-];
-xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] </code></pre>
+]
+xo.filter(xo.curry(compare, '003'), objArr) // [{ name: 'b', id: '003'},{name: 'c', id: '003'}] </code></pre>
 
 
 
@@ -834,7 +834,7 @@ xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 
 
     
 
-    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">({Array}, predicate)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(predicate, {Array})</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
 
@@ -877,29 +877,6 @@ xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 
 
         <tr>
             
-                <td class="name"><code>{Array}</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>collection - The object or array containing the elements to test</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>predicate</code></td>
             
 
@@ -917,6 +894,29 @@ xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 
             
 
             <td class="description last"><p>The function against which each property of the collection will be tested</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>{Array}</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>collection - The object or array containing the elements to test</p></td>
         </tr>
 
     
@@ -957,7 +957,7 @@ xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line308">line 308</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line374">line 374</a>
     </li></ul></dd>
     
 
@@ -1007,15 +1007,15 @@ xo.filter(objArr, xo.curry(compare, '003')); // [{ name: 'b', id: '003'},{name: 
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>function compare(id, obj) {
-  return id === obj.id;
+  return id === obj.id
 }
 const obj = {
   hello: { name: 'a', id: '001' },
   goodbye: { name: 'b', id: '002' },
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
-};
-xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </code></pre>
+}
+xo.find(xo.curry(compare, '003'), obj) // {yes: { name: 'a', id: '003' }} </code></pre>
 
 
 
@@ -1024,7 +1024,7 @@ xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </cod
 
     
 
-    <h4 class="name" id=".findIndex"><span class="type-signature">(static) </span>findIndex<span class="signature">(arr, predicate)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".findIndex"><span class="type-signature">(static) </span>findIndex<span class="signature">(predicate, arr)</span><span class="type-signature"> &rarr; {Number}</span></h4>
 
     
 
@@ -1067,29 +1067,6 @@ xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </cod
 
         <tr>
             
-                <td class="name"><code>arr</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The array containing the elements to test</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>predicate</code></td>
             
 
@@ -1107,6 +1084,29 @@ xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </cod
             
 
             <td class="description last"><p>The function against which each element of the array will be tested</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>arr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The array containing the elements to test</p></td>
         </tr>
 
     
@@ -1147,7 +1147,7 @@ xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </cod
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line244">line 244</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line319">line 319</a>
     </li></ul></dd>
     
 
@@ -1193,15 +1193,15 @@ xo.find(obj, xo.curry(compare, '003')); // {yes: { name: 'a', id: '003' }} </cod
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>function compare(id, obj) {
-  return id === obj.id;
+  return id === obj.id
 }
 const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '002' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
-];
-xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
+]
+xo.findIndex(xo.curry(compare, '003'), objArr) // 2</code></pre>
 
 
 
@@ -1210,7 +1210,7 @@ xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
 
     
 
-    <h4 class="name" id=".findKey"><span class="type-signature">(static) </span>findKey<span class="signature">(obj, predicate)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id=".findKey"><span class="type-signature">(static) </span>findKey<span class="signature">(predicate, obj)</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
 
@@ -1253,29 +1253,6 @@ xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
 
         <tr>
             
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The object containing the elements to test</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>predicate</code></td>
             
 
@@ -1293,6 +1270,29 @@ xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
             
 
             <td class="description last"><p>The function against which each property of the object will be tested</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The object containing the elements to test</p></td>
         </tr>
 
     
@@ -1333,7 +1333,7 @@ xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line277">line 277</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line343">line 343</a>
     </li></ul></dd>
     
 
@@ -1379,15 +1379,15 @@ xo.findIndex(objArr, xo.curry(compare, '003')); // 2</code></pre>
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>function compare(id, obj) {
-  return id === obj.id;
+  return id === obj.id
 }
 const obj = {
   hello: { name: 'a', id: '001' },
   goodbye: { name: 'b', id: '002' },
   yes: { name: 'c', id: '003' },
   no: { name: 'd', id: '004' }
-};
-xo.findKey(obj, xo.curry(compare, '003')); // yes </code></pre>
+}
+xo.findKey(xo.curry(compare, '003'), obj) // yes </code></pre>
 
 
 
@@ -1496,7 +1496,7 @@ xo.findKey(obj, xo.curry(compare, '003')); // yes </code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line174">line 174</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line255">line 255</a>
     </li></ul></dd>
     
 
@@ -1541,8 +1541,8 @@ xo.findKey(obj, xo.curry(compare, '003')); // yes </code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
-xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+    <pre class="prettyprint"><code>const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]]
+xo.flatten(test) // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
 
 
 
@@ -1651,7 +1651,7 @@ xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line84">line 84</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -1696,8 +1696,8 @@ xo.flatten(test); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isArray([1, 2, 3]); // true
-xo.isArray(true); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isArray([1, 2, 3]) // true
+xo.isArray(true) // false</code></pre>
 
 
 
@@ -1806,7 +1806,7 @@ xo.isArray(true); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line28">line 28</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -1851,8 +1851,8 @@ xo.isArray(true); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isBoolean(true); // true
-xo.isBoolean('true'); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isBoolean(true) // true
+xo.isBoolean('true') // false</code></pre>
 
 
 
@@ -1961,7 +1961,7 @@ xo.isBoolean('true'); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line98">line 98</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -2006,8 +2006,8 @@ xo.isBoolean('true'); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isFunction(function(){ return true; }); // true
-xo.isFunction(true); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isFunction(function(){ return true }) // true
+xo.isFunction(true) // false</code></pre>
 
 
 
@@ -2116,7 +2116,7 @@ xo.isFunction(true); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line42">line 42</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -2161,8 +2161,8 @@ xo.isFunction(true); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isNumber(42); // true
-xo.isNumber('true'); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isNumber(42) // true
+xo.isNumber('true') // false</code></pre>
 
 
 
@@ -2271,7 +2271,7 @@ xo.isNumber('true'); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line70">line 70</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -2316,8 +2316,8 @@ xo.isNumber('true'); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isObject({ a: true }); // true
-xo.isObject(true); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isObject({ a: true }) // true
+xo.isObject(true) // false</code></pre>
 
 
 
@@ -2426,7 +2426,7 @@ xo.isObject(true); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line56">line 56</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -2471,8 +2471,8 @@ xo.isObject(true); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>xo.isString('true'); // true
-xo.isString(true); // false</code></pre>
+    <pre class="prettyprint"><code>xo.isString('true') // true
+xo.isString(true) // false</code></pre>
 
 
 
@@ -2604,7 +2604,7 @@ xo.isString(true); // false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line451">line 451</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line170">line 170</a>
     </li></ul></dd>
     
 
@@ -2649,10 +2649,10 @@ xo.isString(true); // false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const arr = [1, 2, 3, 4];
-const square = (a) => a * a;
+    <pre class="prettyprint"><code>const arr = [1, 2, 3, 4]
+const square = a => a * a
 
-const out = xo.map(square, arr); // => [1, 4, 9, 16];</code></pre>
+const out = xo.map(square, arr) // => [1, 4, 9, 16]</code></pre>
 
 
 
@@ -2761,7 +2761,7 @@ const out = xo.map(square, arr); // => [1, 4, 9, 16];</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line364">line 364</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line430">line 430</a>
     </li></ul></dd>
     
 
@@ -2806,11 +2806,11 @@ const out = xo.map(square, arr); // => [1, 4, 9, 16];</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const sum = (a, b) => a + b;
+    <pre class="prettyprint"><code>const sum = (a, b) => a + b
 
-const maybeSum = xo.maybe(sum);
-maybeSum(2, 3); // 5
-maybeSum(null, 3); // doesn't invoke sum</code></pre>
+const maybeSum = xo.maybe(sum)
+maybeSum(2, 3) // 5
+maybeSum(null, 3) // doesn't invoke sum</code></pre>
 
 
 
@@ -2919,7 +2919,7 @@ maybeSum(null, 3); // doesn't invoke sum</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line339">line 339</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line405">line 405</a>
     </li></ul></dd>
     
 
@@ -2964,11 +2964,11 @@ maybeSum(null, 3); // doesn't invoke sum</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const upper = (str) => str.toUpperCase();
+    <pre class="prettyprint"><code>const upper = str => str.toUpperCase()
 
-const memoUpper = xo.memoize(upper);
-memoUpper('foo'); // "FOO"
-memoUpper('foo'); // "FOO" (cached version)</code></pre>
+const memoUpper = xo.memoize(upper)
+memoUpper('foo') // "FOO"
+memoUpper('foo') // "FOO" (cached version)</code></pre>
 
 
 
@@ -3028,7 +3028,7 @@ memoUpper('foo'); // "FOO" (cached version)</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line112">line 112</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -3073,7 +3073,7 @@ memoUpper('foo'); // "FOO" (cached version)</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const ox = xo.noConflict();</code></pre>
+    <pre class="prettyprint"><code>const ox = xo.noConflict()</code></pre>
 
 
 
@@ -3225,7 +3225,7 @@ memoUpper('foo'); // "FOO" (cached version)</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line127">line 127</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line125">line 125</a>
     </li></ul></dd>
     
 
@@ -3270,10 +3270,10 @@ memoUpper('foo'); // "FOO" (cached version)</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ');
+    <pre class="prettyprint"><code>const greet = (greeting, name) => [greeting, name].join(' ')
 
-const sayHi = xo.partial(greet, 'Hi');
-sayHi('Bob'); // "Hi Bob"</code></pre>
+const sayHi = xo.partial(greet, 'Hi')
+sayHi('Bob') // "Hi Bob"</code></pre>
 
 
 
@@ -3394,7 +3394,7 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line422">line 422</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line234">line 234</a>
     </li></ul></dd>
     
 
@@ -3439,11 +3439,11 @@ sayHi('Bob'); // "Hi Bob"</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const increment = (a) => a + 1;
-const square = (a) => a * a;
+    <pre class="prettyprint"><code>const increment = a => a + 1
+const square = a => a * a
 
-const plusOneSquare = xo.pipe(increment, square);
-plusOneSquare(3); // 16</code></pre>
+const plusOneSquare = xo.pipe(increment, square)
+plusOneSquare(3) // 16</code></pre>
 
 
 
@@ -3598,7 +3598,7 @@ plusOneSquare(3); // 16</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line478">line 478</a>
+        <a href="xo.js.html">xo.js</a>, <a href="xo.js.html#line189">line 189</a>
     </li></ul></dd>
     
 
@@ -3643,10 +3643,10 @@ plusOneSquare(3); // 16</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const arr = [1, 2, 3, 4];
-const sum = (a, b) => a + b;
+    <pre class="prettyprint"><code>const arr = [1, 2, 3, 4]
+const sum = (a, b) => a + b
 
-const out = xo.reduce(sum, 0, arr); // => 10;</code></pre>
+const out = xo.reduce(sum, 0, arr) // => 10</code></pre>
 
 
 
@@ -3668,7 +3668,7 @@ const out = xo.reduce(sum, 0, arr); // => 10;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Apr 15 2016 03:11:15 GMT-0400 (EDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri May 13 2016 10:21:54 GMT-0400 (EDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

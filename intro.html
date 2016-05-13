@@ -9,21 +9,21 @@ plusOneSquare(3); // => 16
 </code></pre><h4>curry</h4><p>Takes a function and zero or more arguments to that function. Returns a function that can be invoked with remaining arguments at a later time.</p><pre class="prettyprint source lang-javascript"><code>const add = (a, b) => a + b;
 var addTen = xo.curry(add, 10);
 addTen(32); // => 42
-xo.curry(add)(10, 32) === xo.curry(add)(10)(32); // => true</code></pre><h4>filter</h4><p>Takes an array and a predicate. Returns an array with only those terms that pass the predicate.</p><pre class="prettyprint source lang-javascript"><code>const compare = (id, obj) => id === obj.id;
+xo.curry(add)(10, 32) === xo.curry(add)(10)(32); // => true</code></pre><h4>filter</h4><p>Takes a predicate and an array. Returns an array with only those terms that pass the predicate.</p><pre class="prettyprint source lang-javascript"><code>const compare = (id, obj) => id === obj.id;
 const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '003' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.filter(objArr, xo.curry(compare, '003')); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}]</code></pre><h4>findIndex</h4><p>Takes an array and a predicate. Returns the index of the first term that passes the predicate.</p><pre class="prettyprint source lang-javascript"><code>const compare = (id, obj) => id === obj.id;
+xo.filter(xo.curry(compare, '003'), objArr); // => [{ name: 'b', id: '003'},{name: 'c', id: '003'}]</code></pre><h4>findIndex</h4><p>Takes a predicate and an array. Returns the index of the first term that passes the predicate.</p><pre class="prettyprint source lang-javascript"><code>const compare = (id, obj) => id === obj.id;
 const objArr = [
   { name: 'a', id: '001' },
   { name: 'b', id: '002' },
   { name: 'c', id: '003' },
   { name: 'd', id: '004' }
 ];
-xo.findIndex(objArr, xo.curry(compare, '003')); // => 2</code></pre><h4>flatten</h4><p>Takes an n-dimensional nested array. Returns a flattened 1-dimension array.</p><pre class="prettyprint source lang-javascript"><code>const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
+xo.findIndex(xo.curry(compare, '003'), objArr); // => 2</code></pre><h4>flatten</h4><p>Takes an n-dimensional nested array. Returns a flattened 1-dimension array.</p><pre class="prettyprint source lang-javascript"><code>const test = [0, 1, [2, 3], [4, [5, 6]], 7, [8, [9]]];
 xo.flatten(test); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre><h4>compact</h4><p>Takes an array. Returns an array with all falsy values removed.</p><pre class="prettyprint source lang-javascript"><code>const test = [1, , false, 2, 3, false];
 xo.compact(test); // => [1, 2, 3]</code></pre><h4>memoize</h4><p>Takes a function and returns a functions. Invoking the returned function will return cached results if the same arguments have been provided during previous invocations.</p><pre class="prettyprint source lang-javascript"><code>const upper = (str) => str.toUpperCase();
 var memoUpper = xo.memoize(upper);
