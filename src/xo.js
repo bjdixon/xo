@@ -184,15 +184,7 @@
    * @param {Array} collection - The array that we're operating on
    * @return {Array}
    */
-  xo.map = (callback, collection) => {
-    let output = [],
-      idx,
-      len
-    for (idx = 0, len = collection.length; idx < len; idx += 1) {
-      output.push(callback(collection[idx]))
-    }
-    return output
-  }
+  xo.map = (callback, collection) => collection.map(callback)
 
   /**
    * Takes an array, an initial value and a function.
@@ -212,15 +204,7 @@
    * @param {Array} collection - The array that we're operating on
    * @return {*}
    */
-  xo.reduce = (callback, initialValue, collection) => {
-    let output = initialValue,
-      idx,
-      len
-    for (idx = 0, len = collection.length; idx < len; idx += 1) {
-      output = callback(output, collection[idx])
-    }
-    return output
-  }
+  xo.reduce = (callback, initialValue, collection) => collection.reduce(callback, initialValue)
 
   const combine = fns => arg => xo.reduce((a, fn) => fn(a), arg, fns)
 
@@ -310,14 +294,8 @@
    * @return {Array}
   */
   xo.filter = (predicate, arr) => {
-    let result = [],
-      idx,
-      len
-    for (idx = 0, len = arr.length; idx < len; idx += 1) {
-      if (predicate(arr[idx])) {
-        result.push(arr[idx])
-      }
-    }
+    let result = []
+    arr.forEach(item => predicate(item) && result.push(item))
     return result
   }
 
@@ -360,16 +338,7 @@
    * @param {Array} arr - The array containing the elements to test
    * @return {Number}
   */
-  xo.findIndex = (predicate, arr) => {
-    let idx,
-      len
-    for (idx = 0, len = arr.length; idx < len; idx += 1) {
-      if (predicate(arr[idx])) {
-        return idx
-      }
-    }
-    return -1
-  }
+  xo.findIndex = (predicate, arr) => arr.findIndex(predicate)
 
   /**
    * Takes an object and a predicate function.
