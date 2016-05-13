@@ -11,7 +11,7 @@
   */
   xo.VERSION = '3.0.0'
 
-  const identity = x => x
+  const id = x => x
 
   const is = type => {
     const fastTypes = ['undefined', 'boolean', 'number', 'string', 'symbol', 'function']
@@ -313,7 +313,7 @@
    * @return {Array}
   */
   xo.compact = arr => {
-    return xo.filter(identity, arr)
+    return xo.filter(id, arr)
   }
 
   /**
